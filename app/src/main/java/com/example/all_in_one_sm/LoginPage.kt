@@ -35,8 +35,8 @@ class LoginPage : AppCompatActivity() {
         setContentView(R.layout.login)
 
         // Initialize views
-        username = findViewById(R.id.username_input)
-        password = findViewById(R.id.password_input)
+        username = findViewById(R.id.usernameEditText)
+        password = findViewById(R.id.passwordEditText)
         forgotPassword = findViewById(R.id.forgot_password_text)
         register = findViewById(R.id.register_text)
         login = findViewById(R.id.login_button)
@@ -52,14 +52,14 @@ class LoginPage : AppCompatActivity() {
             val isLoggedIn = performLogin(username.text.toString(), password.text.toString())
 
             if (isLoggedIn) {
-                navigateToHome()
+                navigateToRegister()
             } else {
-                // Show error message or perform other actions for failed login
+                navigateToHome()
             }
         }
 
         register.setOnClickListener {
-            navigateToRegister()
+            navigateToHome()
         }
     }
 }
