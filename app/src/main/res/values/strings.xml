@@ -1,3 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+
 <resources>
     <string name="app_name">All_In_One_SM</string>
+    <string name="second_screen">Second Screen</string>
+    <string name="click_me">Login</string>
+    <string name="email_ou_username">Email ou Username</string>
+    <string name="password">Password</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="don_t_have_an_account_register">Don\'t have an account? Register</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="name">Name</string>
+    <string name="username">Username</string>
+    <string name="email">Email</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="country">Country</string>
+    <string name="city">City</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="already_have_an_account_login">Already have an account? Login.</string>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+            <!-- Customize your theme here. -->
+        </style>
+
+        <style name="EditTextStyle">
+            <item name="android:layout_width">match_parent</item>
+            <item name="android:layout_height">wrap_content</item>
+            <item name="android:layout_margin">16dp</item>
+            <item name="android:padding">8dp</item>
+        </style>
+
+        <style name="ButtonStyle">
+            <item name="android:layout_width">wrap_content</item>
+            <item name="android:layout_height">wrap_content</item>
+            <item name="android:layout_margin">16dp</item>
+        </style>
+
 </resources>
