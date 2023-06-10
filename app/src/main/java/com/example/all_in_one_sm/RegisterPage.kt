@@ -3,6 +3,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
 class RegisterPage : AppCompatActivity() {
@@ -15,6 +16,7 @@ class RegisterPage : AppCompatActivity() {
     private lateinit var password: EditText
     private lateinit var confirmPassword: EditText
     private lateinit var registerButton: Button
+    private lateinit var loginAccount: TextView
 
     private fun performLogin(name: String, username: String, email: String, phone: Int,
     country: String, city: String, password: String, confirmPassword: String): Boolean {
@@ -25,6 +27,12 @@ class RegisterPage : AppCompatActivity() {
 
     private fun navigateToHome() {
         val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        finish() // Optional: finish the current activity to prevent navigating back to the login page
+    }
+
+    private fun navigateToLogin() {
+        val intent = Intent(this, LoginPage::class.java)
         startActivity(intent)
         finish() // Optional: finish the current activity to prevent navigating back to the login page
     }
@@ -42,6 +50,7 @@ class RegisterPage : AppCompatActivity() {
         password = findViewById(R.id.passwordEditText)
         confirmPassword = findViewById(R.id.confirmPasswordEditText)
         registerButton = findViewById(R.id.registerButton)
+        loginAccount = findViewById(R.id.loginAccountInput)
 
         registerButton.setOnClickListener {
             // Perform registration logic here
@@ -50,10 +59,14 @@ class RegisterPage : AppCompatActivity() {
                 city.text.toString(), password.text.toString(), confirmPassword.text.toString())
 
             if (isLoggedIn) {
-                navigateToHome()
+                navigateToLogin()
             } else {
                 // Show error message or perform other actions for failed login
             }
+        }
+
+        loginAccount.setOnClickListener {
+            navigateToLogin()
         }
     }
 }

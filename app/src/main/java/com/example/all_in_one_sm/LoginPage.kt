@@ -52,14 +52,12 @@ class LoginPage : AppCompatActivity() {
             val isLoggedIn = performLogin(username.text.toString(), password.text.toString())
 
             if (isLoggedIn) {
-                navigateToRegister()
-            } else {
                 navigateToHome()
             }
         }
 
         register.setOnClickListener {
-            navigateToHome()
+            navigateToRegister()
         }
     }
 }
