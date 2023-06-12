@@ -10,11 +10,17 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.login)
+        setContentView(R.layout.activity_main)
 
-        val clickLoginPage = findViewById<Button>(R.id.login_button)
+        val clickLoginPage = findViewById<Button>(R.id.LoginB)
         clickLoginPage.setOnClickListener {
-            val intent = Intent(this, RegisterPage::class.java)
+            val intent = Intent(this, LoginPage::class.java)
+            startActivity(intent)
+        }
+
+        val clickEditPage = findViewById<Button>(R.id.EditButton)
+        clickEditPage.setOnClickListener {
+            val intent = Intent(this, EditProfile::class.java)
             startActivity(intent)
         }
     }
