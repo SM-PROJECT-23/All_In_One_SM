@@ -223,53 +223,6 @@
                 android:text="Save" />
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_alignParentBottom="true">
-
-            <ImageButton
-                android:id="@+id/homeButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@android:drawable/sym_action_email"
-                android:contentDescription="Home" />
-
-            <ImageButton
-                android:id="@+id/marketButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@android:drawable/ic_menu_share"
-                android:contentDescription="Market" />
-
-            <ImageButton
-                android:id="@+id/addButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@android:drawable/ic_menu_add"
-                android:contentDescription="Add" />
-
-            <ImageButton
-                android:id="@+id/likeButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@android:drawable/btn_star_big_on"
-                android:contentDescription="Like" />
-
-            <ImageButton
-                android:id="@+id/profileButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@android:drawable/ic_menu_my_calendar"
-                android:contentDescription="Profile" />
-        </LinearLayout>
-
     </LinearLayout>
 
     </LinearLayout>
