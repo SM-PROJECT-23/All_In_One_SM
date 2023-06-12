@@ -5,6 +5,18 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="20dp"
+        tools:context=".EditProfile">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -16,8 +28,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="35dp"
-            android:layout_marginBottom="0dp"
+            android:layout_marginBottom="10dp"
             android:text="Edit Profile"
+            android:layout_marginTop="0dp"
             android:textSize="24sp"
             android:textColor="@android:color/black"
             android:textStyle="bold" />
@@ -51,7 +64,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/nameEditText"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:drawableStart="@drawable/ic_name" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -66,7 +79,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/emailEditEditText"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:drawableStart="@drawable/ic_email" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -97,7 +110,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/countryEditText"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:drawableStart="@drawable/ic_country"/>
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -112,7 +125,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/cityEditText"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:drawableStart="@drawable/ic_city"/>
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -192,7 +205,7 @@
             <Button
                 android:id="@+id/CancelButton"
                 android:layout_width="0dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Cancel" />
@@ -204,12 +217,62 @@
             <Button
                 android:id="@+id/SaveButton"
                 android:layout_width="0dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Save" />
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_alignParentBottom="true">
+
+            <ImageButton
+                android:id="@+id/homeButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@android:drawable/sym_action_email"
+                android:contentDescription="Home" />
+
+            <ImageButton
+                android:id="@+id/marketButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@android:drawable/ic_menu_share"
+                android:contentDescription="Market" />
+
+            <ImageButton
+                android:id="@+id/addButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@android:drawable/ic_menu_add"
+                android:contentDescription="Add" />
+
+            <ImageButton
+                android:id="@+id/likeButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@android:drawable/btn_star_big_on"
+                android:contentDescription="Like" />
+
+            <ImageButton
+                android:id="@+id/profileButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@android:drawable/ic_menu_my_calendar"
+                android:contentDescription="Profile" />
+        </LinearLayout>
 
     </LinearLayout>
+
+    </LinearLayout>
+    </ScrollView>
+
 </RelativeLayout>
