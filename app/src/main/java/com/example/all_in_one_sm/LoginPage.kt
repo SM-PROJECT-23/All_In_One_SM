@@ -1,9 +1,8 @@
 package com.example.all_in_one_sm
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
+import android.view.View
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 
 class LoginPage : AppCompatActivity() {
@@ -22,7 +21,6 @@ class LoginPage : AppCompatActivity() {
     private fun navigateToHome() {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
-        finish() // Optional: finish the current activity to prevent navigating back to the login page
     }
 
     private fun navigateToRegister() {

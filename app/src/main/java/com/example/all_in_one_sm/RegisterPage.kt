@@ -1,6 +1,8 @@
 package com.example.all_in_one_sm
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -28,15 +30,14 @@ class RegisterPage : AppCompatActivity() {
     private fun navigateToHome() {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
-        finish() // Optional: finish the current activity to prevent navigating back to the login page
     }
 
     private fun navigateToLogin() {
         val intent = Intent(this, LoginPage::class.java)
         startActivity(intent)
-        finish() // Optional: finish the current activity to prevent navigating back to the login page
     }
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.register)
