@@ -33,6 +33,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.example.all_in_one_sm.MyAccount"
+            android:label="My Account" />
     </application>
 
 </manifest>

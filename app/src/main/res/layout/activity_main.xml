@@ -23,6 +23,12 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="96dp"
             android:text="Editar Perfil" />
+        <Button
+            android:id="@+id/MyAccount"
+            android:layout_width="267dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="96dp"
+            android:text="My Account" />
 
 
     </LinearLayout>
