@@ -1,9 +1,10 @@
 package com.example.all_in_one_sm
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import okhttp3.*
+import java.io.IOException
 
 class LoginPage : AppCompatActivity() {
     private lateinit var username: EditText
@@ -12,11 +13,43 @@ class LoginPage : AppCompatActivity() {
     private lateinit var register: TextView
     private lateinit var login: Button
 
-    private fun performLogin(username: String, password: String): Boolean {
-        // Your login logic here
-        // Return true if login is successful, false otherwise
-        return true
-    }
+     private fun performLogin(username: String, password: String) {
+
+         val client = OkHttpClient()
+
+         val url = "http://192.168.1.104:3000/login"
+
+         val formBody = FormBody.Builder()
+             .add("username", username)
+             .add("password", password)
+             .build()
+
+         val request = Request.Builder()
+             .url(url)
+             .post(formBody)
+             .build()
+
+         client.newCall(request).enqueue(object : Callback {
+             override fun onFailure(call: Call, e: IOException) {
+                 // Handle network error
+                 e.printStackTrace()
+             }
+
+             override fun onResponse(call: Call, response: Response) {
+                 response.use { response ->
+                     if (!response.isSuccessful) {
+                         // Handle non-successful response
+                         println("Error: ${response.code}")
+                         return
+                     }
+
+                     val responseData = response.body?.string()
+                     // Process the response data
+                     println("Response: Login Sucessfull! $responseData")
+                 }
+             }
+         })
+     }
 
     private fun navigateToHome() {
         val intent = Intent(this, MainActivity::class.java)
@@ -47,11 +80,11 @@ class LoginPage : AppCompatActivity() {
 
         login.setOnClickListener {
             // Perform login action
-            val isLoggedIn = performLogin(username.text.toString(), password.text.toString())
-
-            if (isLoggedIn) {
+            performLogin(username.text.toString(), password.text.toString())
+            navigateToHome()
+            /*if (isLoggedIn) {
                 navigateToHome()
-            }
+            }*/
         }
 
         register.setOnClickListener {
