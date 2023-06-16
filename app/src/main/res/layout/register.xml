@@ -30,6 +30,7 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/nameEditText"
+                android:importantForAutofill="yes"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:drawableStart="@drawable/ic_name" />
@@ -45,6 +46,7 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/usernameEditText"
+                android:importantForAutofill="yes"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:drawableStart="@drawable/ic_username" />
@@ -61,26 +63,13 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/emailEditText"
                 android:layout_width="match_parent"
+                android:importantForAutofill="yes"
                 android:layout_height="50dp"
                 android:drawableStart="@drawable/ic_email" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/PhoneTextInputLayout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Phone Number">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/phoneEditText"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:inputType="number"
-                android:drawableStart="@drawable/ic_phone" />
-
-        </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/countryTextInputLayout"
@@ -92,6 +81,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/countryEditText"
                 android:layout_width="match_parent"
+                android:importantForAutofill="yes"
                 android:layout_height="50dp"
                 android:drawableStart="@drawable/ic_country" />
 
@@ -108,6 +98,7 @@
                 android:id="@+id/cityEditText"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:importantForAutofill="yes"
                 android:drawableStart="@drawable/ic_city" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -124,6 +115,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:inputType="textPassword"
+                android:importantForAutofill="yes"
                 android:drawableStart="@drawable/ic_password" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -139,6 +131,7 @@
                 android:id="@+id/confirmPasswordEditText"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:importantForAutofill="yes"
                 android:inputType="textPassword"
                 android:drawableStart="@drawable/ic_confirmp" />
 

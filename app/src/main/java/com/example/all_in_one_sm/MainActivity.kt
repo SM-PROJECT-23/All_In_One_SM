@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
 
         val clickEditPage = findViewById<Button>(R.id.EditButton)
         clickEditPage.setOnClickListener {
-            val intent = Intent(this, EditProfile::class.java)
+            val intent = Intent(this, Profile::class.java)
             startActivity(intent)
         }
     }
