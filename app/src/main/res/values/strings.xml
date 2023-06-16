@@ -18,6 +18,7 @@
     <string name="city">City</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="already_have_an_account_login">Already have an account? Login.</string>
+    <string name="item_image">Product Image here</string>
 
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
             <!-- Customize your theme here. -->
