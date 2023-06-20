@@ -28,6 +28,10 @@ class MainActivity : AppCompatActivity() {
 
                     fragment = Item.newInstance()
                 }
+                R.id.add -> {
+
+                    fragment = AddItemFragment.newInstance()
+                }
             }
 
             if (fragment != null) {
@@ -38,6 +42,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+<<<<<<< HEAD
         val clickLoginPage = findViewById<Button>(R.id.LoginB)
         clickLoginPage.setOnClickListener {
             val intent = Intent(this, LoginPage::class.java)
@@ -49,6 +54,8 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, RegisterPage::class.java)
             startActivity(intent)
         }
+=======
+>>>>>>> 3b733c03368979761c818bcb336b11ebf4b5bd72
     }
 
     private fun loadFragment(fragment: Fragment) {
