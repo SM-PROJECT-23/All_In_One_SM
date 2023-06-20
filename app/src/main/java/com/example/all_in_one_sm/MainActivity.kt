@@ -1,12 +1,9 @@
 package com.example.all_in_one_sm
-
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Html
 import android.widget.Button
-import android.widget.Toolbar
-import androidx.core.text.HtmlCompat
 import androidx.fragment.app.Fragment
 import com.example.all_in_one_sm.databinding.ActivityMainBinding
 
@@ -49,7 +46,7 @@ class MainActivity : AppCompatActivity() {
 
         val clickEditPage = findViewById<Button>(R.id.EditButton)
         clickEditPage.setOnClickListener {
-            val intent = Intent(this, Profile::class.java)
+            val intent = Intent(this, RegisterPage::class.java)
             startActivity(intent)
         }
     }

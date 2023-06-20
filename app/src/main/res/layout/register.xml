@@ -4,6 +4,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
     <LinearLayout xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -20,6 +24,22 @@
             android:textSize="24sp"
             android:textColor="@android:color/black"
             android:textStyle="bold" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/nameTextInputName"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="ID">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/nameEditTextName"
+            android:importantForAutofill="yes"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:inputType="phone"
+            android:drawableStart="@drawable/ic_name" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/nameTextInput"
@@ -153,5 +173,7 @@
             android:text="@string/already_have_an_account_login" />
 
     </LinearLayout>
+
+    </ScrollView>
 
 </RelativeLayout>

@@ -7,6 +7,7 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.IO
 import okhttp3.*
@@ -15,6 +16,10 @@ import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
 import okio.IOException
 import org.json.JSONObject
+import java.io.BufferedReader
+import java.io.InputStreamReader
+import java.net.HttpURLConnection
+import java.net.URL
 import okhttp3.OkHttpClient as OkHttpClient1
 
 data class UserModel(
@@ -30,6 +35,7 @@ data class UserModel(
 )
 
 class RegisterPage : AppCompatActivity() {
+    private lateinit var id: EditText
     private lateinit var name: EditText
     private lateinit var username: EditText
     private lateinit var email: EditText
@@ -43,7 +49,7 @@ class RegisterPage : AppCompatActivity() {
 
     private fun registerUser(user: UserModel) {
 
-        val url = "http://localhost:4000/register"
+        val url = "http://192.168.1.104:3000/register"
 
         val requestBody = """
         {
@@ -100,6 +106,7 @@ class RegisterPage : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.register)
 
+        id = findViewById(R.id.nameEditTextName)
         name = findViewById(R.id.nameEditText)
         username = findViewById(R.id.usernameEditText)
         email = findViewById(R.id.emailEditText)
@@ -113,17 +120,17 @@ class RegisterPage : AppCompatActivity() {
 
         registerButton.setOnClickListener {
             // Perform registration logic here
-            val newUser = UserModel(
-                1,
-                name.text.toString(),
-                username.text.toString(),
-                email.text.toString(),
-                country.text.toString(),
-                city.text.toString(),
-                password.text.toString(),
-                confirmPassword.text.toString()
-            )
             CoroutineScope(Dispatchers.IO).launch{
+                val newUser = UserModel(
+                    20,
+                    name.text.toString(),
+                    username.text.toString(),
+                    email.text.toString(),
+                    country.text.toString(),
+                    city.text.toString(),
+                    password.text.toString(),
+                    confirmPassword.text.toString()
+                )
                 registerUser(newUser)
                 navigateToLogin()
             }
