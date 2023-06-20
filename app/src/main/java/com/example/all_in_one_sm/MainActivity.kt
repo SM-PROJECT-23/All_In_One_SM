@@ -11,6 +11,12 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
+    private fun loadFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.linearLayout, fragment)
+            .commit()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         getSupportActionBar()?.setTitle(Html.fromHtml("<font color=\"black\">" + getString(R.string.app_name) + "</font>"))
@@ -41,8 +47,6 @@ class MainActivity : AppCompatActivity() {
                 false
             }
         }
-
-<<<<<<< HEAD
         val clickLoginPage = findViewById<Button>(R.id.LoginB)
         clickLoginPage.setOnClickListener {
             val intent = Intent(this, LoginPage::class.java)
@@ -54,13 +58,5 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, RegisterPage::class.java)
             startActivity(intent)
         }
-=======
->>>>>>> 3b733c03368979761c818bcb336b11ebf4b5bd72
-    }
-
-    private fun loadFragment(fragment: Fragment) {
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.linearLayout, fragment)
-            .commit()
     }
 }
