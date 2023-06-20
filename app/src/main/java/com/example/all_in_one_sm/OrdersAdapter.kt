@@ -7,6 +7,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 
 class OrderAdapter(private val orders: List<Order>) :
@@ -59,7 +61,7 @@ class ItemAdapter(private val items: List<Item>) :
         holder.itemPriceTextView.text = item.price.toString()
 
         // load image with Picasso
-        Picasso.get()
+        Glide.with(holder.itemView)
             .load(item.imageUrl)
             .placeholder(R.drawable.placeholder_image)
             .error(R.drawable.error_image)
