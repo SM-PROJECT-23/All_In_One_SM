@@ -40,6 +40,10 @@
             android:exported="true"
             android:parentActivityName=".Orders"/>
         <activity
+            android:name=".Articles"
+            android:exported="true"
+            android:parentActivityName=".Articles"/>
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

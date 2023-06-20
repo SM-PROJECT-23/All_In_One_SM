@@ -30,10 +30,6 @@ class MainActivity : AppCompatActivity() {
 
                     fragment = YourArticle.newInstance()
                 }
-                R.id.fav -> {
-
-                    fragment = Item.newInstance()
-                }
                 R.id.add -> {
 
                     fragment = AddItemFragment.newInstance()
@@ -49,7 +45,7 @@ class MainActivity : AppCompatActivity() {
         }
         val clickLoginPage = findViewById<Button>(R.id.LoginB)
         clickLoginPage.setOnClickListener {
-            val intent = Intent(this, Articles::class.java)
+            val intent = Intent(this, LoginPage::class.java)
             startActivity(intent)
         }
 
