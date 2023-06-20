@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
         }
         val clickLoginPage = findViewById<Button>(R.id.LoginB)
         clickLoginPage.setOnClickListener {
-            val intent = Intent(this, LoginPage::class.java)
+            val intent = Intent(this, Articles::class.java)
             startActivity(intent)
         }
 
