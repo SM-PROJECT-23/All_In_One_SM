@@ -1,6 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:id="@+id/AddItemPage"
+    android:layout_height="wrap_content">
 
     <!-- Small Part -->
     <LinearLayout
@@ -12,36 +13,28 @@
 
         <Button
             android:id="@+id/addPhotoButton"
-            android:layout_width="wrap_content"
-            android:layout_height="36dp"
+            android:layout_width="180dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="100dp"
             android:text="Add Photos"
-            android:layout_marginTop="120dp"
-            android:layout_marginBottom="80dp"
-            android:background="@drawable/button_background"/>
+            android:background="@drawable/button_background" />
 
     </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2.5dp"
-        android:layout_below="@id/smallPart"
-        android:background="@color/separator_color" />
 
     <!-- Big Part -->
 
     <LinearLayout
         android:id="@+id/bigPart"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/smallPart"
-        android:layout_marginTop="-51dp"
+        android:layout_height="wrap_content"
         android:gravity="center"
+        android:layout_marginTop="200dp"
         android:orientation="vertical">
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tituloTextInputLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="375dp"
+            android:layout_width="355dp"
             android:layout_height="46dp"
             android:hint="Titulo">
 
@@ -56,7 +49,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/marcaTextInputLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="375dp"
+            android:layout_width="355dp"
             android:layout_height="46dp"
             android:hint="Marca">
 
@@ -71,7 +64,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/categoriaTextInputLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="375dp"
+            android:layout_width="355dp"
             android:layout_height="46dp"
             android:hint="Categoria">
 
@@ -86,7 +79,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tamanhoTextInputLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="375dp"
+            android:layout_width="355dp"
             android:layout_height="46dp"
             android:hint="Tamanho">
 
@@ -101,7 +94,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/corTextInputLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="375dp"
+            android:layout_width="355dp"
             android:layout_height="46dp"
             android:hint="Cor">
 
@@ -116,7 +109,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/estadoTextInputLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="375dp"
+            android:layout_width="355dp"
             android:layout_height="46dp"
             android:hint="Estado">
 
@@ -137,7 +130,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="61dp"
         android:orientation="horizontal">
 
         <Button
@@ -148,6 +140,7 @@
             android:layout_weight="1"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="8dp"
+            android:layout_marginBottom="24dp"
             android:background="@drawable/button_background" />
 
         <Button
@@ -158,6 +151,7 @@
             android:layout_weight="1"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="10dp"
+            android:layout_marginBottom="24dp"
             android:background="@drawable/button_background" />
 
     </LinearLayout>

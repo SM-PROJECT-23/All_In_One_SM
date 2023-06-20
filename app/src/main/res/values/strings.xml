@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
-    <string name="app_name">All_In_One_SM</string>
+    <string name="app_name">All-in-One-Outlet</string>
     <string name="second_screen">Second Screen</string>
     <string name="click_me">Login</string>
     <string name="email_ou_username">Email ou Username</string>
@@ -21,20 +21,22 @@
     <string name="item_image">Product Image here</string>
 
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-            <!-- Customize your theme here. -->
-        </style>
+        <!-- Customize your theme here. -->
+    </style>
 
-        <style name="EditTextStyle">
-            <item name="android:layout_width">match_parent</item>
-            <item name="android:layout_height">wrap_content</item>
-            <item name="android:layout_margin">16dp</item>
-            <item name="android:padding">8dp</item>
-        </style>
+    <style name="EditTextStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">16dp</item>
+        <item name="android:padding">8dp</item>
+    </style>
 
-        <style name="ButtonStyle">
-            <item name="android:layout_width">wrap_content</item>
-            <item name="android:layout_height">wrap_content</item>
-            <item name="android:layout_margin">16dp</item>
-        </style>
+    <style name="ButtonStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">16dp</item>
+    </style>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

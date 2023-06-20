@@ -1,17 +1,52 @@
 package com.example.all_in_one_sm
-import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Html
 import android.widget.Button
+import androidx.fragment.app.Fragment
+import com.example.all_in_one_sm.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-    @SuppressLint("MissingInflatedId")
+
+    private lateinit var binding: ActivityMainBinding
+
+    private fun loadFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.linearLayout, fragment)
+            .commit()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        getSupportActionBar()?.setTitle(Html.fromHtml("<font color=\"black\">" + getString(R.string.app_name) + "</font>"))
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
+        binding.bottomNavigation.setOnItemSelectedListener { item ->
+            var fragment: Fragment? = null
+            when (item.itemId) {
+                R.id.home -> {
+
+                    fragment = YourArticle.newInstance()
+                }
+                R.id.fav -> {
+
+                    fragment = Item.newInstance()
+                }
+                R.id.add -> {
+
+                    fragment = AddItemFragment.newInstance()
+                }
+            }
+
+            if (fragment != null) {
+                loadFragment(fragment)
+                true
+            } else {
+                false
+            }
+        }
         val clickLoginPage = findViewById<Button>(R.id.LoginB)
         clickLoginPage.setOnClickListener {
             val intent = Intent(this, Articles::class.java)
@@ -20,9 +55,8 @@ class MainActivity : AppCompatActivity() {
 
         val clickEditPage = findViewById<Button>(R.id.EditButton)
         clickEditPage.setOnClickListener {
-            val intent = Intent(this, EditProfile::class.java)
+            val intent = Intent(this, RegisterPage::class.java)
             startActivity(intent)
         }
     }
 }
-

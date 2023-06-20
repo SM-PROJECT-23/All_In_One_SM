@@ -1,9 +1,14 @@
 package com.example.all_in_one_sm
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import com.google.gson.Gson
+import com.google.gson.annotations.SerializedName
+import com.google.gson.reflect.TypeToken
+import kotlinx.coroutines.*
+import okhttp3.*
 
 class LoginPage : AppCompatActivity() {
     private lateinit var username: EditText
@@ -12,11 +17,7 @@ class LoginPage : AppCompatActivity() {
     private lateinit var register: TextView
     private lateinit var login: Button
 
-    private fun performLogin(username: String, password: String): Boolean {
-        // Your login logic here
-        // Return true if login is successful, false otherwise
-        return true
-    }
+    val baseUrl = "http://192.168.1.104:3000/login"
 
     private fun navigateToHome() {
         val intent = Intent(this, MainActivity::class.java)
@@ -27,6 +28,73 @@ class LoginPage : AppCompatActivity() {
         val intent = Intent(this, RegisterPage::class.java)
         startActivity(intent)
     }
+
+    data class User(
+        //val userId: Int?=0,
+        @SerializedName("Username")
+        val username:String?="",
+        @SerializedName("Password")
+        val password:String?="",
+    )
+
+    @SuppressLint("SuspiciousIndentation")
+    @OptIn(DelicateCoroutinesApi::class)
+    fun login(username: String, password: String, callback: (Boolean) -> Unit) {
+
+        // Create an OkHttp client
+        val client = OkHttpClient()
+
+        // Create a request with the JSON body
+        val request = Request.Builder()
+            .url(baseUrl)
+            .get()
+            .build()
+
+        // Make the API call in a coroutine to avoid blocking the main thread
+        GlobalScope.launch(Dispatchers.IO) {
+            try {
+                // Send the request and retrieve the response
+                val response = client.newCall(request).execute()
+
+                // Check if the login was successful (HTTP status code 200-299)
+                //val loginSuccessful = response.isSuccessful
+
+                if (response.isSuccessful) {
+                    val loginResponse = response.body?.string()
+
+                    val listUsers = Gson().fromJson<List<User?>>(
+                        loginResponse,
+                        object : TypeToken<List<User?>?>() {}.type
+                    )
+
+                    var isUser = false
+
+                    for (user in listUsers) {
+                        if ((user?.username == username) && (user.password == password)) {
+                            isUser = true
+                            break
+                        }
+                    }
+                    if (isUser){
+                        //Toast.makeText(applicationContext, "Login Successful!", Toast.LENGTH_SHORT).show()
+                        println("Login com sucesso");
+
+                            callback(true)
+
+                    } else{
+                        //Toast.makeText(applicationContext, "Login Failed!", Toast.LENGTH_SHORT).show()
+                        println("Erro no login");
+                        callback(false)
+                    }
+                }
+
+            } catch (e: Exception) {
+                e.printStackTrace();
+                    callback(false)
+            }
+        }
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,16 +114,12 @@ class LoginPage : AppCompatActivity() {
         }
 
         login.setOnClickListener {
-            // Perform login action
-            val isLoggedIn = performLogin(username.text.toString(), password.text.toString())
+            login(username.text.toString(), password.text.toString()) { if (it) navigateToHome() }
 
-            if (isLoggedIn) {
-                navigateToHome()
+
+            register.setOnClickListener {
+                navigateToRegister()
             }
-        }
-
-        register.setOnClickListener {
-            navigateToRegister()
         }
     }
 }
