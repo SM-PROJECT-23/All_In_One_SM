@@ -2,6 +2,7 @@ package com.example.all_in_one_sm
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.text.Html
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.google.gson.Gson
@@ -98,6 +99,7 @@ class LoginPage : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        getSupportActionBar()?.setTitle(Html.fromHtml("<font color=\"black\">" + getString(R.string.app_name) + "</font>"))
         setContentView(R.layout.login)
 
         // Initialize views

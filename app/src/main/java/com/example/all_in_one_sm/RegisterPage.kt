@@ -2,6 +2,7 @@ package com.example.all_in_one_sm
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.text.Html
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -104,6 +105,7 @@ class RegisterPage : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        getSupportActionBar()?.setTitle(Html.fromHtml("<font color=\"black\">" + getString(R.string.app_name) + "</font>"))
         setContentView(R.layout.register)
 
         id = findViewById(R.id.nameEditTextName)
