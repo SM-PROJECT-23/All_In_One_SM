@@ -26,22 +26,6 @@
             android:textStyle="bold" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/nameTextInputName"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="ID">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/nameEditTextName"
-            android:importantForAutofill="yes"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:inputType="phone"
-            android:drawableStart="@drawable/ic_name" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/nameTextInput"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
@@ -169,8 +153,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:textColor="@android:color/black"
-            android:text="@string/already_have_an_account_login" />
+            android:text="Already have an account?"
+            android:layout_marginStart="83dp"
+            android:layout_gravity="left"
+            android:textColor="@android:color/black" />
+
+        <TextView
+            android:id="@+id/loginAccountInput1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-20dp"
+            android:layout_marginStart="90dp"
+            android:text="Login"
+            android:textColor="@android:color/black" />
 
     </LinearLayout>
 

@@ -44,8 +44,7 @@
             android:parentActivityName=".Orders"/>
         <activity
             android:name=".Articles"
-            android:exported="true"
-            android:parentActivityName=".Articles"/>
+            android:exported="true"/>
         <activity
             android:name=".MainActivity"
             android:exported="true">

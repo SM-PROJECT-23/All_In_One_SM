@@ -1,38 +1,37 @@
 package com.example.all_in_one_sm
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.text.Html
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
+import com.google.gson.annotations.SerializedName
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.IO
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaType
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
-import okio.IOException
-import org.json.JSONObject
-import java.io.BufferedReader
-import java.io.InputStreamReader
-import java.net.HttpURLConnection
-import java.net.URL
 import okhttp3.OkHttpClient as OkHttpClient1
 
 data class UserModel(
-    val userId: Int?=0,
     val name: String ="",
+    @SerializedName("name")
     val username:String?="",
+    @SerializedName("username")
     val email:String?="",
-    //var phoneNumber:Int?=0,
+    @SerializedName("email")
+   /* var phoneNumber:Int? = 0,
+    @SerializedName("phoneNumber")*/
     val country:String?="",
+    @SerializedName("country")
     val city:String?="",
+    @SerializedName("city")
     val password:String?="",
-    val confirmPassword:String?=""
+    @SerializedName("password")
+    val confirmPassword:String?="",
 )
 
 class RegisterPage : AppCompatActivity() {
@@ -47,6 +46,7 @@ class RegisterPage : AppCompatActivity() {
     private lateinit var confirmPassword: EditText
     private lateinit var registerButton: Button
     private lateinit var loginAccount: TextView
+    private lateinit var loginAccount1: TextView
 
     private fun registerUser(user: UserModel) {
 
@@ -54,7 +54,6 @@ class RegisterPage : AppCompatActivity() {
 
         val requestBody = """
         {
-            "id": "${user.userId}"
             "name": "${user.name}",
             "username": "${user.username}",
             "email": "${user.email}",
@@ -105,29 +104,32 @@ class RegisterPage : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        getSupportActionBar()?.setTitle(Html.fromHtml("<font color=\"black\">" + getString(R.string.app_name) + "</font>"))
+        supportActionBar?.setTitle(Html.fromHtml("<font color=\"black\">" + getString(R.string.app_name) + "</font>"))
         setContentView(R.layout.register)
 
-        id = findViewById(R.id.nameEditTextName)
+        //id = findViewById(R.id.nameEditTextName)
         name = findViewById(R.id.nameEditText)
         username = findViewById(R.id.usernameEditText)
         email = findViewById(R.id.emailEditText)
-        //phone = findViewById(R.id.phoneEditText)
+      //  phone = findViewById(R.id.phoneEditText)
         country = findViewById(R.id.countryEditText)
         city = findViewById(R.id.cityEditText)
         password = findViewById(R.id.passwordEditText)
         confirmPassword = findViewById(R.id.confirmPasswordEditText)
         registerButton = findViewById(R.id.registerButton)
         loginAccount = findViewById(R.id.loginAccountInput)
+        loginAccount1 = findViewById(R.id.loginAccountInput1)
+
+        loginAccount1.setTextColor(Color.parseColor("#1F63A6"));
 
         registerButton.setOnClickListener {
             // Perform registration logic here
-            CoroutineScope(Dispatchers.IO).launch{
+            CoroutineScope(IO).launch{
                 val newUser = UserModel(
-                    20,
                     name.text.toString(),
                     username.text.toString(),
                     email.text.toString(),
+                  //  123098456,
                     country.text.toString(),
                     city.text.toString(),
                     password.text.toString(),
@@ -139,7 +141,7 @@ class RegisterPage : AppCompatActivity() {
             navigateToHome()
         }
 
-        loginAccount.setOnClickListener {
+        loginAccount1.setOnClickListener {
             navigateToLogin()
         }
     }

@@ -78,7 +78,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="56dp"
-            android:text="@string/don_t_have_an_account_register"
+            android:text="Don´t have an account?"
+            android:layout_marginStart="83dp"
+            android:layout_gravity="left"
+            android:textColor="@android:color/black" />
+
+        <TextView
+            android:id="@+id/register_text1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-20dp"
+            android:layout_marginStart="80dp"
+            android:text="Register"
             android:textColor="@android:color/black" />
 
     </LinearLayout>

@@ -1,6 +1,8 @@
 package com.example.all_in_one_sm
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
 import android.text.Html
 import android.widget.*
@@ -17,11 +19,12 @@ class LoginPage : AppCompatActivity() {
     private lateinit var forgotPassword: TextView
     private lateinit var register: TextView
     private lateinit var login: Button
+    private lateinit var register1: TextView
 
     val baseUrl = "http://192.168.1.104:3000/login"
 
-    private fun navigateToHome() {
-        val intent = Intent(this, MainActivity::class.java)
+    private fun navigateToArticles() {
+        val intent = Intent(this, Articles::class.java)
         startActivity(intent)
     }
 
@@ -32,9 +35,9 @@ class LoginPage : AppCompatActivity() {
 
     data class User(
         //val userId: Int?=0,
-        @SerializedName("Username")
+        @SerializedName("username")
         val username:String?="",
-        @SerializedName("Password")
+        @SerializedName("password")
         val password:String?="",
     )
 
@@ -56,9 +59,6 @@ class LoginPage : AppCompatActivity() {
             try {
                 // Send the request and retrieve the response
                 val response = client.newCall(request).execute()
-
-                // Check if the login was successful (HTTP status code 200-299)
-                //val loginSuccessful = response.isSuccessful
 
                 if (response.isSuccessful) {
                     val loginResponse = response.body?.string()
@@ -99,7 +99,7 @@ class LoginPage : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        getSupportActionBar()?.setTitle(Html.fromHtml("<font color=\"black\">" + getString(R.string.app_name) + "</font>"))
+        supportActionBar?.title = Html.fromHtml("<font color=\"black\">" + getString(R.string.app_name) + "</font>")
         setContentView(R.layout.login)
 
         // Initialize views
@@ -107,7 +107,11 @@ class LoginPage : AppCompatActivity() {
         password = findViewById(R.id.passwordEditText)
         forgotPassword = findViewById(R.id.forgot_password_text)
         register = findViewById(R.id.register_text)
+        register1 = findViewById(R.id.register_text1)
+
         login = findViewById(R.id.login_button)
+
+        register1.setTextColor(Color.parseColor("#1F63A6"));
 
         // Set click listeners
         forgotPassword.setOnClickListener {
@@ -116,12 +120,11 @@ class LoginPage : AppCompatActivity() {
         }
 
         login.setOnClickListener {
-            login(username.text.toString(), password.text.toString()) { if (it) navigateToHome() }
+            login(username.text.toString(), password.text.toString()) { if (it) navigateToArticles() }
+        }
 
-
-            register.setOnClickListener {
-                navigateToRegister()
-            }
+        register1.setOnClickListener {
+            navigateToRegister()
         }
     }
 }

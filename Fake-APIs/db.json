@@ -1,21 +1,20 @@
 {
   "login": [
     {
-      "Username": "Tendulkar",
-      "Password": "abc"
+      "username": "Tendulkar",
+      "password": "abc"
     },
     {
-      "Username": "Cook",
-      "Password": "abc"
+      "username": "Cook",
+      "password": "abc"
     },
     {
-      "Username": "Test",
-      "Password": "abc"
+      "username": "Test",
+      "password": "abc"
     }	
   ],
   "register": [
     {
-      "id": 1,
       "name": "Alexandra",
       "username": "xana",
       "email": "xana@xpto.com",
