@@ -30,10 +30,6 @@ class MainActivity : AppCompatActivity() {
 
                     fragment = YourArticle.newInstance()
                 }
-                R.id.fav -> {
-
-                    fragment = Item.newInstance()
-                }
                 R.id.add -> {
 
                     fragment = AddItemFragment.newInstance()
