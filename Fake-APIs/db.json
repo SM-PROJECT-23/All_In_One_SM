@@ -1,0 +1,28 @@
+{
+  "login": [
+    {
+      "Username": "Tendulkar",
+      "Password": "abc"
+    },
+    {
+      "Username": "Cook",
+      "Password": "abc"
+    },
+    {
+      "Username": "Test",
+      "Password": "abc"
+    }	
+  ],
+  "register": [
+    {
+      "id": 1,
+      "name": "Alexandra",
+      "username": "xana",
+      "email": "xana@xpto.com",
+      "city": "braganca",
+      "country": "portugal",
+      "password": "abc",
+      "confirmPass": "abc"
+    }
+  ]
+}
