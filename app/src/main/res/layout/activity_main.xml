@@ -25,7 +25,8 @@
             android:id="@+id/EditButton"
             android:layout_width="267dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="96dp"
+            android:text="Edit"
+            android:layout_marginTop="96dp"/>
     </LinearLayout>
 
 
