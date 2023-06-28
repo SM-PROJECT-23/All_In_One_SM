@@ -1,6 +1,166 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- Small Part -->
+    <LinearLayout
+        android:id="@+id/smallPart2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/addPhotoButton2"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:text="Add Photos"
+            android:layout_marginTop="120dp"
+            android:layout_marginBottom="80dp"
+            android:background="@drawable/button_background"/>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2.5dp"
+        android:layout_below="@id/smallPart2"
+        android:background="@color/separator_color" />
+
+    <!-- Big Part -->
+
+    <LinearLayout
+        android:id="@+id/bigPart2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/smallPart2"
+        android:layout_marginTop="-51dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tituloTextInputLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="375dp"
+            android:layout_height="46dp"
+            android:hint="Titulo">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tituloEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/goncalo_titulo" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/marcaTextInputLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="375dp"
+            android:layout_height="46dp"
+            android:hint="Marca">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/marcaEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/goncalo_marca" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/categoriaTextInputLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="375dp"
+            android:layout_height="46dp"
+            android:hint="Categoria">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/categoriaEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/goncalo_categoria" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tamanhoTextInputLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="375dp"
+            android:layout_height="46dp"
+            android:hint="Tamanho">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tamanhoEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/goncalo_tamanho" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/corTextInputLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="375dp"
+            android:layout_height="46dp"
+            android:hint="Cor">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/corEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/goncalo_cor" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/estadoTextInputLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="375dp"
+            android:layout_height="46dp"
+            android:hint="Estado">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/estadoEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/goncalo_estado" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Add your UI elements for the big part here -->
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/bottomSection2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="61dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/cancelbuttonEditPage"
+            android:layout_width="6dp"
+            android:layout_height="35dp"
+            android:text="Cancel"
+            android:layout_weight="1"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/button_background" />
+
+        <Button
+            android:id="@+id/savebuttonEditPage"
+            android:layout_width="6dp"
+            android:layout_height="35dp"
+            android:text="Save"
+            android:layout_weight="1"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/button_background" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>

@@ -1,30 +1,99 @@
 package com.example.all_in_one_sm
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
-import android.view.View
+import android.text.Html
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.google.gson.annotations.SerializedName
+import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers.IO
+import okhttp3.*
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.RequestBody.Companion.toRequestBody
+import java.util.*
+
+data class UserModel(
+    var id: UUID,
+    @SerializedName("id")
+    val name: String ="",
+    @SerializedName("name")
+    val username:String?="",
+    @SerializedName("username")
+    val email:String?="",
+    @SerializedName("email")
+   /* var phoneNumber:Int? = 0,
+    @SerializedName("phoneNumber")*/
+    val country:String?="",
+    @SerializedName("country")
+    val city:String?="",
+    @SerializedName("city")
+    val password:String?="",
+    @SerializedName("password")
+    val confirmPassword:String?="",
+)
 
 class RegisterPage : AppCompatActivity() {
     private lateinit var name: EditText
     private lateinit var username: EditText
     private lateinit var email: EditText
-    private lateinit var phone: EditText
+   // private lateinit var phone: EditText
     private lateinit var country: EditText
     private lateinit var city: EditText
     private lateinit var password: EditText
     private lateinit var confirmPassword: EditText
     private lateinit var registerButton: Button
     private lateinit var loginAccount: TextView
+    private lateinit var loginAccount1: TextView
 
-    private fun performLogin(name: String, username: String, email: String, phone: Int,
-    country: String, city: String, password: String, confirmPassword: String): Boolean {
-        // Your login logic here
-        // Return true if login is successful, false otherwise
-        return true
+
+    @OptIn(DelicateCoroutinesApi::class)
+    private fun registerUser(user: UserModel) {
+
+        val url = "http://192.168.1.64:3000/people"
+
+        val requestBody = """
+        {
+            "id": "${user.id}",
+            "name": "${user.name}",
+            "username": "${user.username}",
+            "email": "${user.email}",
+            "city": "${user.city}",
+            "country": "${user.country}",
+            "password": "${user.password}",
+            "confirm pass": "${user.confirmPassword}"   
+        }
+    """.trimIndent()
+
+        val mediaType = "application/json; charset=utf-8".toMediaType()
+
+        val client = okhttp3.OkHttpClient()
+
+        // Create a request with the JSON body
+        val request = Request.Builder()
+            .url(url)
+            .post(requestBody.toRequestBody(mediaType))
+            .build()
+
+        // Make the API call in a coroutine to avoid blocking the main thread
+            try {
+                // Send the request and retrieve the response
+                val response = client.newCall(request).execute()
+
+                val registerResponse = response.body?.string()
+
+                if (response.isSuccessful) {
+                    println("Registration Successful!")
+                }else {
+                    println("Registration Failed. Response Code: $registerResponse")
+                }
+
+            } catch (e: Exception) {
+                e.printStackTrace();
+            }
     }
 
     private fun navigateToHome() {
@@ -40,33 +109,45 @@ class RegisterPage : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        supportActionBar?.setTitle(Html.fromHtml("<font color=\"black\">" + getString(R.string.app_name) + "</font>"))
         setContentView(R.layout.register)
 
+        //id = findViewById(R.id.nameEditTextName)
         name = findViewById(R.id.nameEditText)
         username = findViewById(R.id.usernameEditText)
         email = findViewById(R.id.emailEditText)
-        phone = findViewById(R.id.phoneEditText)
+      //  phone = findViewById(R.id.phoneEditText)
         country = findViewById(R.id.countryEditText)
         city = findViewById(R.id.cityEditText)
         password = findViewById(R.id.passwordEditText)
         confirmPassword = findViewById(R.id.confirmPasswordEditText)
         registerButton = findViewById(R.id.registerButton)
         loginAccount = findViewById(R.id.loginAccountInput)
+        loginAccount1 = findViewById(R.id.loginAccountInput1)
+
+        loginAccount1.setTextColor(Color.parseColor("#1F63A6"));
 
         registerButton.setOnClickListener {
             // Perform registration logic here
-            val isLoggedIn = performLogin(name.text.toString() ,username.text.toString(),
-                email.text.toString(), phone.inputType, country.text.toString(),
-                city.text.toString(), password.text.toString(), confirmPassword.text.toString())
-
-            if (isLoggedIn) {
+            CoroutineScope(IO).launch{
+                val newUser = UserModel(
+                    id = UUID.randomUUID(),
+                    name.text.toString(),
+                    username.text.toString(),
+                    email.text.toString(),
+                  //  123098456,
+                    country.text.toString(),
+                    city.text.toString(),
+                    password.text.toString(),
+                    confirmPassword.text.toString()
+                )
+                registerUser(newUser)
                 navigateToLogin()
-            } else {
-                // Show error message or perform other actions for failed login
             }
+            navigateToHome()
         }
 
-        loginAccount.setOnClickListener {
+        loginAccount1.setOnClickListener {
             navigateToLogin()
         }
     }
