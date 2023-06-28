@@ -25,17 +25,13 @@
             android:exported="true"
             android:parentActivityName=".LoginPage"/>
         <activity
-            android:name=".MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:name=".ShoppingBag"
+            android:exported="true"
+        />
         <activity
-            android:name="com.example.all_in_one_sm.MyAccount"
-            android:label="My Account" />
+            android:name=".FailPayment"
+            android:exported="true">
+        </activity>
     </application>
 
 </manifest>
