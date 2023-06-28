@@ -1,27 +1,24 @@
 {
-  "login": [
+  "people": [	
     {
-      "username": "Tendulkar",
-      "password": "abc"
-    },
-    {
-      "username": "Cook",
-      "password": "abc"
-    },
-    {
-      "username": "Test",
-      "password": "abc"
-    }	
-  ],
-  "register": [
-    {
-      "name": "Alexandra",
-      "username": "xana",
-      "email": "xana@xpto.com",
-      "city": "braganca",
-      "country": "portugal",
+      "id": "5abccf9e-63fa-49b8-893c-ee1ce35c9f4d",
+      "name": "ola",
+      "username": "ola",
+      "email": "ola",
+      "city": "ola",
+      "country": "ola",
       "password": "abc",
-      "confirmPass": "abc"
+      "confirm pass": "abc"
+    },
+    {
+      "id": "c42b2502-d08e-47b8-8696-cd54eaf7ef1b",
+      "name": "teste",
+      "username": "teste",
+      "email": "teste",
+      "city": "teste",
+      "country": "teste",
+      "password": "abc",
+      "confirm pass": "abc"
     }
   ]
 }

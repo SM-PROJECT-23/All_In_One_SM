@@ -14,9 +14,11 @@ import kotlinx.coroutines.Dispatchers.IO
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.RequestBody.Companion.toRequestBody
-import okhttp3.OkHttpClient as OkHttpClient1
+import java.util.*
 
 data class UserModel(
+    var id: UUID,
+    @SerializedName("id")
     val name: String ="",
     @SerializedName("name")
     val username:String?="",
@@ -35,11 +37,10 @@ data class UserModel(
 )
 
 class RegisterPage : AppCompatActivity() {
-    private lateinit var id: EditText
     private lateinit var name: EditText
     private lateinit var username: EditText
     private lateinit var email: EditText
-    private lateinit var phone: EditText
+   // private lateinit var phone: EditText
     private lateinit var country: EditText
     private lateinit var city: EditText
     private lateinit var password: EditText
@@ -48,12 +49,15 @@ class RegisterPage : AppCompatActivity() {
     private lateinit var loginAccount: TextView
     private lateinit var loginAccount1: TextView
 
+
+    @OptIn(DelicateCoroutinesApi::class)
     private fun registerUser(user: UserModel) {
 
-        val url = "http://192.168.1.104:3000/register"
+        val url = "http://192.168.1.64:3000/people"
 
         val requestBody = """
         {
+            "id": "${user.id}",
             "name": "${user.name}",
             "username": "${user.username}",
             "email": "${user.email}",
@@ -66,29 +70,30 @@ class RegisterPage : AppCompatActivity() {
 
         val mediaType = "application/json; charset=utf-8".toMediaType()
 
-        CoroutineScope(IO).launch {
-            val request = Request.Builder()
-                .url(url)
-                .post(requestBody.toRequestBody(mediaType))
-                .build()
+        val client = okhttp3.OkHttpClient()
 
-            val client = OkHttpClient1()
-            val response = client.newCall(request).execute()
+        // Create a request with the JSON body
+        val request = Request.Builder()
+            .url(url)
+            .post(requestBody.toRequestBody(mediaType))
+            .build()
 
-            val responseCode = response.code
+        // Make the API call in a coroutine to avoid blocking the main thread
+            try {
+                // Send the request and retrieve the response
+                val response = client.newCall(request).execute()
 
-            val responseBody = response.body?.string()
+                val registerResponse = response.body?.string()
 
-            withContext(Dispatchers.Main) {
-                if (responseCode == 201) {
+                if (response.isSuccessful) {
                     println("Registration Successful!")
-                } else {
-                    println("Registration Failed. Response Code: $responseCode")
+                }else {
+                    println("Registration Failed. Response Code: $registerResponse")
                 }
 
-                println("Response Body: $responseBody")
+            } catch (e: Exception) {
+                e.printStackTrace();
             }
-        }
     }
 
     private fun navigateToHome() {
@@ -126,6 +131,7 @@ class RegisterPage : AppCompatActivity() {
             // Perform registration logic here
             CoroutineScope(IO).launch{
                 val newUser = UserModel(
+                    id = UUID.randomUUID(),
                     name.text.toString(),
                     username.text.toString(),
                     email.text.toString(),
