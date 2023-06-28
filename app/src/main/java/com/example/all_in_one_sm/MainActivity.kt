@@ -50,5 +50,10 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, RegisterPage::class.java)
             startActivity(intent)
         }
+        val clickMyAccount = findViewById<Button>(R.id.MyAccount)
+        clickMyAccount.setOnClickListener {
+            val intent = Intent(this, MyAccount::class.java)
+            startActivity(intent)
+        }
     }
 }

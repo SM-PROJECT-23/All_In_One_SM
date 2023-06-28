@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:background="@android:color/white">
+
+    <ImageView
+        android:layout_width="393dp"
+        android:layout_height="296dp"
+        android:layout_above="@id/successful_text"
+        android:layout_marginBottom="49dp"
+        android:src="@drawable/success" />
+
+    <TextView
+        android:id="@+id/successful_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="Payment Successful!"
+        android:textColor="#00FF00"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/payment_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/successful_text"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="43dp"
+        android:text="As been paid to"
+        android:textColor="@android:color/black"
+        android:textSize="18sp" />
+</RelativeLayout>
