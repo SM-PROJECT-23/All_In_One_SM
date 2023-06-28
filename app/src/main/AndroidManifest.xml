@@ -29,7 +29,7 @@
         <activity
             android:name=".YourArticle"
             android:exported="true"
-            tools:ignore="Instantiatable" />
+            android:parentActivityName=".YourArticle"/>
         <activity
             android:name=".AddressBook"
             android:exported="true"
@@ -42,6 +42,14 @@
             android:name=".Orders"
             android:exported="true"
             android:parentActivityName=".Orders"/>
+        <activity
+            android:name=".YourItemPage"
+            android:exported="true"
+            android:parentActivityName=".YourItemPage"/>
+        <activity
+            android:name=".EditItemPage"
+            android:exported="true"
+            android:parentActivityName=".EditItemPage"/>
         <activity
             android:name=".Articles"
             android:exported="true"/>

@@ -26,10 +26,6 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigation.setOnItemSelectedListener { item ->
             var fragment: Fragment? = null
             when (item.itemId) {
-                R.id.home -> {
-
-                    fragment = YourArticle.newInstance()
-                }
                 R.id.add -> {
 
                     fragment = AddItemFragment.newInstance()

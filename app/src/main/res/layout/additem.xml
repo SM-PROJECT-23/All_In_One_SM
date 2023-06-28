@@ -133,7 +133,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/cancelbuttonAddPage"
+            android:id="@+id/cancelbuttonAddPage1"
             android:layout_width="6dp"
             android:layout_height="35dp"
             android:text="Cancel"
@@ -144,7 +144,7 @@
             android:background="@drawable/button_background" />
 
         <Button
-            android:id="@+id/savebuttonAddPage"
+            android:id="@+id/savebuttonAddPage1"
             android:layout_width="6dp"
             android:layout_height="35dp"
             android:text="Save"
