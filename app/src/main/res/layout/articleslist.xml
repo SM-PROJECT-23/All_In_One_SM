@@ -15,40 +15,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-black"
-            android:text="Your Articles"
+            android:text="Articles"
             android:textColor="@color/black"
             android:textSize="36dp"
             android:translationX="10dp"
             android:translationY="20dp" />
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="50dp"
-            android:layout_marginBottom="0dp"
-            android:text="X Item"
-            android:textColor="@color/black"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="310dp"
-            android:layout_marginTop="-20dp"
-            android:layout_marginBottom="0dp"
-            android:text="Add Item"
-            android:textColor="@color/black"
-            android:textStyle="bold" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="0dp"
-            android:layout_marginBottom="0dp"
-            android:background="@color/separator_color" />
-
 
         <ScrollView
             android:layout_width="match_parent"
@@ -363,7 +334,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="25dp"
             android:background="@color/grey"
             app:itemIconTint="@color/black"
             app:itemTextColor="@color/black"
