@@ -37,8 +37,7 @@
             android:parentActivityName=".LoginPage"/>
         <activity
             android:name=".ShoppingBag"
-            android:exported="true"
-        />
+            android:exported="true" />
         <activity
             android:name=".YourArticle"
             android:exported="true"
@@ -66,6 +65,14 @@
         <activity
             android:name=".Articles"
             android:exported="true"/>
+        <activity
+            android:name=".ArticlesList"
+            android:exported="true"
+            android:parentActivityName=".ArticlesList"/>
+        <activity
+            android:name=".ArticlesItem"
+            android:exported="true"
+            android:parentActivityName=".ArticlesItem"/>
     </application>
 
 </manifest>

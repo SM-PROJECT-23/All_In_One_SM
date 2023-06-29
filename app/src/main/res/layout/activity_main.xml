@@ -25,8 +25,25 @@
             android:id="@+id/EditButton"
             android:layout_width="267dp"
             android:layout_height="wrap_content"
-            android:text="Edit"
-            android:layout_marginTop="96dp"/>
+            android:text="Edit" />
+
+        <Button
+            android:id="@+id/Article"
+            android:layout_width="267dp"
+            android:layout_height="wrap_content"
+            android:text="Articles" />
+
+        <Button
+            android:id="@+id/YourArticle"
+            android:layout_width="267dp"
+            android:layout_height="wrap_content"
+            android:text="Your Articles" />
+
+        <Button
+            android:id="@+id/ArticleItem"
+            android:layout_width="267dp"
+            android:layout_height="wrap_content"
+            android:text="Article item" />
     </LinearLayout>
 
 

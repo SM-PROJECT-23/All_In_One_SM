@@ -50,5 +50,21 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, RegisterPage::class.java)
             startActivity(intent)
         }
+
+        val clickArticlePage = findViewById<Button>(R.id.Article)
+        clickArticlePage.setOnClickListener {
+            val intent = Intent(this, ArticlesList::class.java)
+            startActivity(intent)
+        }
+        val clickYourArticlePage = findViewById<Button>(R.id.YourArticle)
+        clickYourArticlePage.setOnClickListener {
+            val intent = Intent(this, YourArticle::class.java)
+            startActivity(intent)
+        }
+        val clickYourArticleItemPage = findViewById<Button>(R.id.ArticleItem)
+        clickYourArticleItemPage.setOnClickListener {
+            val intent = Intent(this, ArticlesItem::class.java)
+            startActivity(intent)
+        }
     }
 }
