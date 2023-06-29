@@ -9,7 +9,7 @@ class Articles: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         getSupportActionBar()?.setTitle(Html.fromHtml("<font color=\"black\">" + getString(R.string.app_name) + "</font>"))
-        setContentView(R.layout.articles)
+        setContentView(R.layout.articleslist)
         }
 
 }
