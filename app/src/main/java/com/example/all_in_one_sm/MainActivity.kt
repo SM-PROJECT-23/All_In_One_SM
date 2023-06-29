@@ -1,4 +1,5 @@
 package com.example.all_in_one_sm
+
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -11,9 +12,9 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
-    private fun loadFragment(fragment: Fragment) {
+    private fun loadFragment(fragment: Fragment, containerId: Int) {
         supportFragmentManager.beginTransaction()
-            .replace(R.id.linearLayout, fragment)
+            .replace(containerId, fragment)
             .commit()
     }
 
@@ -25,15 +26,21 @@ class MainActivity : AppCompatActivity() {
 
         binding.bottomNavigation.setOnItemSelectedListener { item ->
             var fragment: Fragment? = null
+            var containerId: Int = -1 // Initialize with an invalid container ID
+
             when (item.itemId) {
                 R.id.add -> {
-
                     fragment = AddItemFragment.newInstance()
+                    containerId = R.id.linearLayout // Update with the correct container ID for AddItemFragment
                 }
+                // Add cases for other menu items and assign corresponding fragments and container IDs
+                // case R.id.item2 -> { fragment = Fragment2.newInstance(); containerId = R.id.container2 }
+                // case R.id.item3 -> { fragment = Fragment3.newInstance(); containerId = R.id.container3 }
+                // case R.id.item4 -> { fragment = Fragment4.newInstance(); containerId = R.id.container4 }
             }
 
-            if (fragment != null) {
-                loadFragment(fragment)
+            if (fragment != null && containerId != -1) {
+                loadFragment(fragment, containerId) // Pass the fragment and container ID to the loadFragment function
                 true
             } else {
                 false

@@ -58,14 +58,6 @@
             android:exported="true"
             android:parentActivityName=".Orders"/>
         <activity
-            android:name=".YourItemPage"
-            android:exported="true"
-            android:parentActivityName=".YourItemPage"/>
-        <activity
-            android:name=".EditItemPage"
-            android:exported="true"
-            android:parentActivityName=".EditItemPage"/>
-        <activity
             android:name=".Articles"
             android:exported="true"/>
         <activity
@@ -76,6 +68,15 @@
             android:name=".ArticlesItem"
             android:exported="true"
             android:parentActivityName=".ArticlesItem"/>
+        <activity
+            android:name=".YourItemPage"
+            android:exported="true"
+            android:parentActivityName=".MainActivity"/>
+
+        <activity
+            android:name=".EditItemPage"
+            android:exported="true"
+            android:parentActivityName=".YourItemPage"/>
     </application>
 
 </manifest>
