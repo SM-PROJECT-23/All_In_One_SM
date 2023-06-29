@@ -1,5 +1,5 @@
 {
-  "people": [	
+  "people": [
     {
       "id": "5abccf9e-63fa-49b8-893c-ee1ce35c9f4d",
       "name": "ola",
@@ -17,6 +17,16 @@
       "email": "teste",
       "city": "teste",
       "country": "teste",
+      "password": "abc",
+      "confirm pass": "abc"
+    },
+    {
+      "id": "1c3bc540-b31d-4b9e-8326-c031460078d4",
+      "name": "123",
+      "username": "123",
+      "email": "123",
+      "city": "123",
+      "country": "123",
       "password": "abc",
       "confirm pass": "abc"
     }

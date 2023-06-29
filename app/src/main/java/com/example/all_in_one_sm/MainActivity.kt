@@ -19,9 +19,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        getSupportActionBar()?.setTitle(Html.fromHtml("<font color=\"black\">" + getString(R.string.app_name) + "</font>"))
+        getSupportActionBar()?.title = Html.fromHtml("<font color=\"black\">" + getString(R.string.app_name) + "</font>")
         binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.login_and_register)
 
         binding.bottomNavigation.setOnItemSelectedListener { item ->
             var fragment: Fragment? = null
@@ -39,13 +39,19 @@ class MainActivity : AppCompatActivity() {
                 false
             }
         }
-        val clickLoginPage = findViewById<Button>(R.id.LoginB)
+        val clickLoginPage = findViewById<Button>(R.id.loginButton)
         clickLoginPage.setOnClickListener {
             val intent = Intent(this, LoginPage::class.java)
             startActivity(intent)
         }
 
-        val clickEditPage = findViewById<Button>(R.id.EditButton)
+        val clickRegisterPage = findViewById<Button>(R.id.registoB)
+        clickRegisterPage.setOnClickListener {
+            val intent = Intent(this, RegisterPage::class.java)
+            startActivity(intent)
+        }
+
+       /* val clickEditPage = findViewById<Button>(R.id.EditButton)
         clickEditPage.setOnClickListener {
             val intent = Intent(this, RegisterPage::class.java)
             startActivity(intent)
@@ -65,6 +71,6 @@ class MainActivity : AppCompatActivity() {
         clickYourArticleItemPage.setOnClickListener {
             val intent = Intent(this, ArticlesItem::class.java)
             startActivity(intent)
-        }
+        }*/
     }
 }

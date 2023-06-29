@@ -22,6 +22,14 @@
             app:rippleColor="#353232" />
 
         <Button
+            android:id="@+id/registoB"
+            android:layout_width="267dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="96dp"
+            android:text="Register"
+            app:rippleColor="#353232" />
+
+        <Button
             android:id="@+id/EditButton"
             android:layout_width="267dp"
             android:layout_height="wrap_content"
