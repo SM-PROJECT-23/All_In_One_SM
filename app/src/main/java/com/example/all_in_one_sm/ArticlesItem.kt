@@ -6,7 +6,9 @@ import android.text.Html
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.example.all_in_one_sm.*
+import com.example.all_in_one_sm.YourArticle
 import com.google.android.material.bottomnavigation.BottomNavigationView
+
 
 class ArticlesItem : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
 
@@ -23,7 +25,7 @@ class ArticlesItem : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         // Handle navigation item clicks
         when (item.itemId) {
             R.id.home -> {
-                val intent = Intent(this, ArticlesItem::class.java)
+                val intent = Intent(this, YourArticle::class.java)
                 startActivity(intent)
                 return true
             }

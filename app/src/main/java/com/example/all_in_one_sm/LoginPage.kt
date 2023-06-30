@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.gson.Gson
 import com.google.gson.annotations.SerializedName
 import com.google.gson.reflect.TypeToken
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.*
 import okhttp3.*
 
@@ -24,8 +23,8 @@ class LoginPage : AppCompatActivity() {
 
     val baseUrl = "http://192.168.1.72:3000/people"
 
-    private fun navigateToArticlesItem() {
-        val intent = Intent(this, ArticlesItem::class.java)
+    private fun navigateToYourArticle() {
+        val intent = Intent(this, YourArticle::class.java)
         startActivity(intent)
     }
 
@@ -121,7 +120,7 @@ class LoginPage : AppCompatActivity() {
         }
 
         login.setOnClickListener {
-            login(username.text.toString(), password.text.toString()) { if (it) navigateToArticlesItem() }
+            login(username.text.toString(), password.text.toString()) { if (it) navigateToYourArticle() }
         }
 
         register1.setOnClickListener {

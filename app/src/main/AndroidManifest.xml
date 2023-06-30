@@ -51,8 +51,7 @@
             android:exported="true" />
         <activity
             android:name=".YourArticle"
-            android:exported="true"
-            android:parentActivityName=".YourArticle" />
+            android:exported="true"/>
         <activity
             android:name=".AddressBook"
             android:exported="true"
