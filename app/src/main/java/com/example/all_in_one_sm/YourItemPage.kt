@@ -11,12 +11,9 @@ class YourItemPage: AppCompatActivity() {
     private lateinit var remove1: Button
     private lateinit var edit1: Button
 
-    private fun navigateToAddItemFragment() {
-        val fragment = AddItemFragment()
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.linearLayout, fragment) // Replace "R.id.container" with the ID of the container view in your activity's layout
-            .addToBackStack(null)
-            .commit()
+    private fun navigateToAddItemPage() {
+        val intent = Intent(this, AddItemPage::class.java)
+        startActivity(intent)
     }
 
     private fun navigateToEditItemPage() {
@@ -35,7 +32,7 @@ class YourItemPage: AppCompatActivity() {
         edit1 = findViewById(R.id.editbuttonYourPage)
 
         remove1.setOnClickListener {
-            navigateToAddItemFragment()
+            navigateToAddItemPage()
         }
 
         edit1.setOnClickListener {

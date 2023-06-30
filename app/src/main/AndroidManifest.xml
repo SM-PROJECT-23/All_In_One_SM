@@ -13,20 +13,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.All_In_One_SM"
         tools:targetApi="31">
+
+        <activity
+            android:name=".loginAndRegister"
+            android:exported="true"
+            android:theme="@style/AppTheme.NoActionBar" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
         <activity
             android:name=".ItemUser"
             android:exported="false"
             android:label="@string/title_activity_item_user"
             android:theme="@style/Theme.All_In_One_SM" />
-        <activity
-            android:name=".MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
         <activity
             android:name=".Profile"
             android:exported="false" />
@@ -34,13 +36,12 @@
             android:name=".EditProfile"
             android:exported="false" />
         <activity
-            android:name=".loginAndRegister"
-            android:exported="false"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".LoginPage"
-            android:exported="true"
-            android:parentActivityName=".MainActivity" />
+            android:exported="true"/>
+        <activity
+            android:name=".ArticlesItem"
+            android:exported="true"/>
+
         <activity
             android:name=".RegisterPage"
             android:exported="true"
@@ -65,20 +66,22 @@
             android:exported="true"
             android:parentActivityName=".Orders" />
         <activity
-            android:name=".Articles"
-            android:exported="true" />
-        <activity
             android:name=".ArticlesList"
             android:exported="true"
             android:parentActivityName=".ArticlesList" />
         <activity
-            android:name=".ArticlesItem"
+            android:name=".AddItemPage"
             android:exported="true"
-            android:parentActivityName=".ArticlesItem" />
+            android:parentActivityName=".AddItemPage" />
         <activity
             android:name=".YourItemPage"
-            android:exported="true"
-            android:parentActivityName=".MainActivity" />
+            android:exported="true" />
+        <activity
+            android:name=".FavoritesPage"
+            android:exported="true" />
+        <activity
+            android:name=".MyAccount"
+            android:exported="true" />
         <activity
             android:name=".EditItemPage"
             android:exported="true"
