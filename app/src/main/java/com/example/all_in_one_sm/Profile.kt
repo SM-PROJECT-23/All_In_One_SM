@@ -31,7 +31,7 @@ data class User(
         val password:String?="",
     )
 
-class Profile : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
+abstract class Profile : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var nameTextView: TextView
     private lateinit var usernameTextView: TextView
@@ -52,8 +52,6 @@ class Profile : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelect
         super.onCreate(savedInstanceState)
         getSupportActionBar()?.setTitle(Html.fromHtml("<font color=\"black\">" + getString(R.string.app_name) + "</font>"))
         setContentView(R.layout.profile)
-
-<<<<<<< HEAD
         fetchUser()
 
         if (user != null){
@@ -65,10 +63,8 @@ class Profile : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelect
             passwordTextView.text.toString()*/
             print(user)
         }
-=======
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottomNavigation)
         bottomNavigationView.setOnNavigationItemSelectedListener(this)
->>>>>>> 18576e1a429295d334f039141c5402f82358fe32
 
         nameTextView = findViewById(R.id.nameTextView)
         usernameTextView = findViewById(R.id.usernameTextView)
@@ -122,15 +118,11 @@ class Profile : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelect
                 println("Exception occurred: ${e.message}")
                 e.printStackTrace()
             }
-<<<<<<< HEAD
         }
         }
-=======
-    }
-*/
     }
 
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+    /*override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation item clicks
         when (item.itemId) {
             R.id.home -> {
@@ -161,7 +153,4 @@ class Profile : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelect
             // Add more cases for each menu item
         }
         return false
-    }
-
->>>>>>> 18576e1a429295d334f039141c5402f82358fe32
-}
+    }*/

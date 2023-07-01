@@ -14,7 +14,6 @@ import kotlinx.coroutines.*
 import okhttp3.*
 
 class LoginPage : AppCompatActivity() {
-
     private lateinit var username: EditText
     private lateinit var password: EditText
     private lateinit var forgotPassword: TextView
@@ -24,13 +23,8 @@ class LoginPage : AppCompatActivity() {
 
     val baseUrl = "http://192.168.1.104:3000/people"
 
-<<<<<<< HEAD
-    private fun navigateToArticlesList() {
-        val intent = Intent(this, ArticlesList::class.java)
-=======
-    private fun navigateToYourArticle() {
+    private fun navigateToArticlesItem() {
         val intent = Intent(this, YourArticle::class.java)
->>>>>>> 18576e1a429295d334f039141c5402f82358fe32
         startActivity(intent)
     }
 
@@ -38,12 +32,6 @@ class LoginPage : AppCompatActivity() {
         val intent = Intent(this, RegisterPage::class.java)
         startActivity(intent)
     }
-
-    private fun navigateToResetPass() {
-        val intent = Intent(this, Email::class.java)
-        startActivity(intent)
-    }
-
 
     data class User(
         //val userId: Int?=0,
@@ -92,7 +80,7 @@ class LoginPage : AppCompatActivity() {
                         //Toast.makeText(applicationContext, "Login Successful!", Toast.LENGTH_SHORT).show()
                         println("Login com sucesso");
 
-                            callback(true)
+                        callback(true)
 
                     } else{
                         //Toast.makeText(applicationContext, "Login Failed!", Toast.LENGTH_SHORT).show()
@@ -103,7 +91,7 @@ class LoginPage : AppCompatActivity() {
 
             } catch (e: Exception) {
                 e.printStackTrace();
-                    callback(false)
+                callback(false)
             }
         }
     }
@@ -127,15 +115,12 @@ class LoginPage : AppCompatActivity() {
 
         // Set click listeners
         forgotPassword.setOnClickListener {
-            navigateToResetPass()
+            // Handle "Forgot password" click
+            // Implement your logic here
         }
 
         login.setOnClickListener {
-<<<<<<< HEAD
-            login(username.text.toString(), password.text.toString()) { if (it) navigateToArticlesList() }
-=======
-            login(username.text.toString(), password.text.toString()) { if (it) navigateToYourArticle() }
->>>>>>> 18576e1a429295d334f039141c5402f82358fe32
+            login(username.text.toString(), password.text.toString()) { if (it) navigateToArticlesItem() }
         }
 
         register1.setOnClickListener {
