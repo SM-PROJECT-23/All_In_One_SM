@@ -24,8 +24,13 @@ class LoginPage : AppCompatActivity() {
 
     val baseUrl = "http://192.168.1.104:3000/people"
 
+<<<<<<< HEAD
     private fun navigateToArticlesList() {
         val intent = Intent(this, ArticlesList::class.java)
+=======
+    private fun navigateToYourArticle() {
+        val intent = Intent(this, YourArticle::class.java)
+>>>>>>> 18576e1a429295d334f039141c5402f82358fe32
         startActivity(intent)
     }
 
@@ -126,7 +131,11 @@ class LoginPage : AppCompatActivity() {
         }
 
         login.setOnClickListener {
+<<<<<<< HEAD
             login(username.text.toString(), password.text.toString()) { if (it) navigateToArticlesList() }
+=======
+            login(username.text.toString(), password.text.toString()) { if (it) navigateToYourArticle() }
+>>>>>>> 18576e1a429295d334f039141c5402f82358fe32
         }
 
         register1.setOnClickListener {

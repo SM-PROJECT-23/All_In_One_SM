@@ -4,6 +4,7 @@
     android:id="@+id/fail_payment_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="center"
     android:background="@android:color/white">
 
@@ -14,7 +15,7 @@
         android:layout_alignParentEnd="true"
         android:layout_marginStart="11dp"
         android:layout_marginEnd="10dp"
-        android:layout_marginBottom="49dp"
+        android:layout_marginTop="43dp"
         android:src="@drawable/rejected" />
 
     <TextView
@@ -24,6 +25,7 @@
         android:layout_centerInParent="true"
         android:text="Payment Failed!"
         android:textColor="#FF0000"
+        android:layout_marginTop="73dp"
         android:textSize="30sp" />
 
     <Button
@@ -35,7 +37,18 @@
         android:layout_alignParentEnd="true"
         android:layout_gravity="center_horizontal"
         android:layout_marginStart="78dp"
-        android:layout_marginTop="53dp"
+        android:layout_marginTop="73dp"
         android:layout_marginEnd="78dp"
         android:text="Back to Shopping Bag" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="-45dp"
+        android:background="@color/grey"
+        app:itemIconTint="@color/black"
+        app:itemTextColor="@color/black"
+        app:menu="@menu/bottommenu" />
 </RelativeLayout>

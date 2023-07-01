@@ -9,12 +9,12 @@ import com.example.all_in_one_sm.YourArticle
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
-class YourArticle: AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
+class FavoritesPage: AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         getSupportActionBar()?.setTitle(Html.fromHtml("<font color=\"black\">" + getString(R.string.app_name) + "</font>"))
-        setContentView(R.layout.yourarticle)
+        setContentView(R.layout.favorites)
 
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottomNavigation)
         bottomNavigationView.setOnNavigationItemSelectedListener(this)

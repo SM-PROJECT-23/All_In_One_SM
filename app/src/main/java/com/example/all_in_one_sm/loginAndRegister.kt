@@ -40,11 +40,11 @@ class loginAndRegister : AppCompatActivity() {
         titulo = findViewById(R.id.all)
 
         registerB.setOnClickListener {
-            navigateToLogin()
+            navigateToRegister()
         }
 
         loginB.setOnClickListener {
-            navigateToRegister()
+            navigateToLogin()
         }
     }
 }
