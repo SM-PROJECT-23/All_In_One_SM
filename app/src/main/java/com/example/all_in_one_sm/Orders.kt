@@ -1,7 +1,10 @@
 package com.example.all_in_one_sm
 
+import android.content.Intent
 import android.os.Bundle
+import android.text.Html
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -10,16 +13,21 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.text.SimpleDateFormat
 import java.util.*
 
-class Orders : AppCompatActivity() {
+class Orders : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var orders: List<Order>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        getSupportActionBar()?.setTitle(Html.fromHtml("<font color=\"black\">" + getString(R.string.app_name) + "</font>"))
         setContentView(R.layout.activity_order)
+
+        val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottomNavigation)
+        bottomNavigationView.setOnNavigationItemSelectedListener(this)
 
         // Sample orders
         orders = listOf(
@@ -77,6 +85,39 @@ class Orders : AppCompatActivity() {
         orderListRecyclerView.addItemDecoration(dividerItemDecoration)
 
         orderListRecyclerView.adapter = OrderAdapter(orders)
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        // Handle navigation item clicks
+        when (item.itemId) {
+            R.id.home -> {
+                val intent = Intent(this, YourArticle::class.java)
+                startActivity(intent)
+                return true
+            }
+            R.id.shop -> {
+                val intent = Intent(this, ShoppingBag::class.java)
+                startActivity(intent)
+                return true
+            }
+            R.id.add -> {
+                val intent = Intent(this, AddItemPage::class.java)
+                startActivity(intent)
+                return true
+            }
+            R.id.fav -> {
+                val intent = Intent(this, FavoritesPage::class.java)
+                startActivity(intent)
+                return true
+            }
+            R.id.user -> {
+                val intent = Intent(this, MyAccount::class.java)
+                startActivity(intent)
+                return true
+            }
+            // Add more cases for each menu item
+        }
+        return false
     }
 }
 

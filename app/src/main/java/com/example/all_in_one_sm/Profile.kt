@@ -1,10 +1,13 @@
 package com.example.all_in_one_sm
 import android.content.Intent
 import android.os.Bundle
+import android.text.Html
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.github.kittinunf.fuel.Fuel
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.gson.Gson
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
@@ -33,7 +36,7 @@ data class UserProfile(
 
     )
 
-class Profile : AppCompatActivity() {
+class Profile : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var nameTextView: TextView
     private lateinit var usernameTextView: TextView
@@ -84,7 +87,11 @@ class Profile : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        getSupportActionBar()?.setTitle(Html.fromHtml("<font color=\"black\">" + getString(R.string.app_name) + "</font>"))
         setContentView(R.layout.profile)
+
+        val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottomNavigation)
+        bottomNavigationView.setOnNavigationItemSelectedListener(this)
 
         nameTextView = findViewById(R.id.nameTextView)
         usernameTextView = findViewById(R.id.usernameTextView)
@@ -135,4 +142,38 @@ class Profile : AppCompatActivity() {
     }
 */
     }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        // Handle navigation item clicks
+        when (item.itemId) {
+            R.id.home -> {
+                val intent = Intent(this, YourArticle::class.java)
+                startActivity(intent)
+                return true
+            }
+            R.id.shop -> {
+                val intent = Intent(this, ShoppingBag::class.java)
+                startActivity(intent)
+                return true
+            }
+            R.id.add -> {
+                val intent = Intent(this, AddItemPage::class.java)
+                startActivity(intent)
+                return true
+            }
+            R.id.fav -> {
+                val intent = Intent(this, FavoritesPage::class.java)
+                startActivity(intent)
+                return true
+            }
+            R.id.user -> {
+                val intent = Intent(this, MyAccount::class.java)
+                startActivity(intent)
+                return true
+            }
+            // Add more cases for each menu item
+        }
+        return false
+    }
+
 }
