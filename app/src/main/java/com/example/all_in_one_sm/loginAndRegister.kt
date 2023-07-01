@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 
 class loginAndRegister : AppCompatActivity() {
 
-    private lateinit var logo : Image
+    //private lateinit var logo : Image
     private lateinit var loginB : Button
     private lateinit var registerB : Button
     private lateinit var titulo: TextView

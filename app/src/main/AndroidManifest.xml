@@ -27,6 +27,12 @@
             android:name=".EditProfile"
             android:exported="false"/>
         <activity
+            android:name=".Email"
+            android:exported="false"/>
+        <activity
+            android:name=".ForgotPassword"
+            android:exported="false"/>
+        <activity
             android:name=".loginAndRegister"
             android:theme="@style/AppTheme.NoActionBar"
             android:exported="false"/>

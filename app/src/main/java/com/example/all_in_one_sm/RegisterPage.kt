@@ -25,8 +25,8 @@ data class UserModel(
     @SerializedName("username")
     val email:String?="",
     @SerializedName("email")
-   /* var phoneNumber:Int? = 0,
-    @SerializedName("phoneNumber")*/
+    var phoneNumber:String?= "",
+    @SerializedName("phoneNumber")
     val country:String?="",
     @SerializedName("country")
     val city:String?="",
@@ -40,7 +40,7 @@ class RegisterPage : AppCompatActivity() {
     private lateinit var name: EditText
     private lateinit var username: EditText
     private lateinit var email: EditText
-   // private lateinit var phone: EditText
+    private lateinit var phone: EditText
     private lateinit var country: EditText
     private lateinit var city: EditText
     private lateinit var password: EditText
@@ -53,7 +53,7 @@ class RegisterPage : AppCompatActivity() {
     @OptIn(DelicateCoroutinesApi::class)
     private fun registerUser(user: UserModel) {
 
-        val url = "http://192.168.1.64:3000/people"
+        val url = "http://192.168.1.104:3000/people"
 
         val requestBody = """
         {
@@ -62,6 +62,7 @@ class RegisterPage : AppCompatActivity() {
             "username": "${user.username}",
             "email": "${user.email}",
             "city": "${user.city}",
+            "phone": "${user.phoneNumber}
             "country": "${user.country}",
             "password": "${user.password}",
             "confirm pass": "${user.confirmPassword}"   

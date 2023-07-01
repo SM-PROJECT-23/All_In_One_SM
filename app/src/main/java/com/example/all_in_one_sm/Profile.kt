@@ -1,11 +1,16 @@
 package com.example.all_in_one_sm
+import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.github.kittinunf.fuel.Fuel
 import com.google.gson.Gson
+import com.google.gson.annotations.SerializedName
+import com.google.gson.reflect.TypeToken
+import kotlinx.coroutines.*
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -14,23 +19,13 @@ import okhttp3.Response
 import retrofit2.http.Body
 import retrofit2.http.PUT
 import retrofit2.http.Path
+import java.util.*
 
-/*interface ApiService {
-    @PUT("users/{userId}/password")
-    suspend fun changePassword(
-        @Path("userId") userId: String,
-        @Body newPassword: NewPasswordRequest
-    ): Response<Unit>
-}*/
-
-
-data class UserProfile(
-    val name: String,
-    val username: String,
-    val email: String,
-    val country: String,
-    val password: String
-
+data class User(
+        @SerializedName("username")
+        val username:String?="",
+        @SerializedName("password")
+        val password:String?="",
     )
 
 class Profile : AppCompatActivity() {
@@ -41,41 +36,9 @@ class Profile : AppCompatActivity() {
     private lateinit var phoneTextView: TextView
     private lateinit var countryTextView: TextView
     private lateinit var passwordTextView: TextView
+    private var user: Response? = null
 
-    /*  private fun loginUser() {
-        // Create a UserProfile object with the provided login information
-        val userProfile = UserProfile("xana", "x", "xana@ipb.pt", "pt", "abc")
-
-        // Create a Gson instance to convert the UserProfile object to JSON
-        val gson = Gson()
-        val json = gson.toJson(userProfile)
-
-        // Create an OkHttpClient instance to send the HTTP request
-        val client = OkHttpClient()
-
-        // Set the media type for the request body
-        val mediaType = "application/json".toMediaType()
-
-        // Create a request body with the JSON payload
-        val requestBody = json.toRequestBody(mediaType)
-
-        // Create a POST request with the API endpoint URL and request body
-        val request = Request.Builder()
-            .url("https://my-json-server.typicode.com/a41792/SM3/register/")
-            .post(requestBody)
-            .build()
-
-        // Execute the request and get the response
-        client.newCall(request).execute().use { response ->
-            if (!response.isSuccessful) {
-                throw Exception("Failed to login: " + response.code)
-            }
-
-            // Handle the response here
-            // You can access the response body using response.body()?.string()
-            // Extract relevant information from the response and perform necessary actions
-        }
-    }*/
+    val baseUrl = "http://192.168.1.104:3000/people"
 
     private fun navigateToEditProfile() {
         val intent = Intent(this, EditProfile::class.java)
@@ -86,6 +49,18 @@ class Profile : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.profile)
 
+        fetchUser()
+
+        if (user != null){
+            /*nameTextView.text.toString(),
+            usernameTextView.text.toString(),
+            emailTextView.text.toString(),
+            phoneTextView.text.toString(),
+            countryTextView.text.toString(),
+            passwordTextView.text.toString()*/
+            print(user)
+        }
+
         nameTextView = findViewById(R.id.nameTextView)
         usernameTextView = findViewById(R.id.usernameTextView)
         emailTextView = findViewById(R.id.emailTextView)
@@ -95,44 +70,49 @@ class Profile : AppCompatActivity() {
 
         val editButton: Button = findViewById(R.id.EditProfileButton)
 
-        val PROFILE_API_URL = "https://my-json-server.typicode.com/a41792/SM3/users/{userId}"
+        editButton.setOnClickListener {
+            navigateToEditProfile()
+        }
+    }
 
-        // Assuming you have the user's ID and the new password
-        val userId = "user123"
-        val newPassword = "newpassword"
+    @OptIn(DelicateCoroutinesApi::class)
+    @SuppressLint("SuspiciousIndentation")
+    private fun fetchUser() {
+        // Create an OkHttp client
+        val client = OkHttpClient()
 
-        // Create a new instance of the user's profile with the updated password
-        val updatedProfile = UserProfile("", "", "", "", newPassword)
+        // Create a request with the JSON body
+        val request = Request.Builder()
+            .url(baseUrl)
+            .get()
+            .build()
 
-        // Convert the updated profile to JSON
-        val jsonBody = Gson().toJson(updatedProfile)
+        // Make the API call in a coroutine to avoid blocking the main thread
+        GlobalScope.launch(Dispatchers.IO) {
+            try {
+                // Send the request and retrieve the response
+                val response = client.newCall(request).execute()
 
-        // Make the API request to update the password
-        /*Fuel.patch(PROFILE_API_URL.replace("{userId}", userId))
-            .header("Content-Type", "application/json")
-            .body(jsonBody)
-            .response { _, response, result ->
-                when (result) {
-                    is Result.Success -> {
-                        // Handle the successful response from the server
-                        if (response.statusCode == 200) {
-                            println("Password updated successfully")
-                        } else {
-                            println("Failed to update password. Server returned status code: ${response.statusCode}")
-                        }
+                if (response.isSuccessful) {
+                    val newResponse = response.body?.string()
+
+                     val listUsers = Gson().fromJson<List<User?>>(
+                        newResponse,
+                        object : TypeToken<List<User?>?>() {}.type
+                    )
+
+                    // Process the list of users here
+                    listUsers?.forEach { user ->
+                        // Access user properties
+                        println("User ID: ${user}")
                     }
-                    is Result.Failure -> {
-                        // Handle the error case
-                        println("Failed to update password: ${result.error.localizedMessage}")
-                    }
-                    else -> {}
+                } else {
+                    println("Error: ${response.code} ${response.message}")
                 }
-
-                editButton.setOnClickListener {
-                    navigateToEditProfile()
-                }
+            } catch (e: Exception) {
+                println("Exception occurred: ${e.message}")
+                e.printStackTrace()
             }
-    }
-*/
-    }
+        }
+        }
 }

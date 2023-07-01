@@ -14,6 +14,7 @@ import kotlinx.coroutines.*
 import okhttp3.*
 
 class LoginPage : AppCompatActivity() {
+
     private lateinit var username: EditText
     private lateinit var password: EditText
     private lateinit var forgotPassword: TextView
@@ -21,10 +22,10 @@ class LoginPage : AppCompatActivity() {
     private lateinit var login: Button
     private lateinit var register1: TextView
 
-    val baseUrl = "http://192.168.1.72:3000/people"
+    val baseUrl = "http://192.168.1.104:3000/people"
 
-    private fun navigateToArticlesItem() {
-        val intent = Intent(this, ArticlesItem::class.java)
+    private fun navigateToArticlesList() {
+        val intent = Intent(this, ArticlesList::class.java)
         startActivity(intent)
     }
 
@@ -32,6 +33,12 @@ class LoginPage : AppCompatActivity() {
         val intent = Intent(this, RegisterPage::class.java)
         startActivity(intent)
     }
+
+    private fun navigateToResetPass() {
+        val intent = Intent(this, Email::class.java)
+        startActivity(intent)
+    }
+
 
     data class User(
         //val userId: Int?=0,
@@ -115,12 +122,11 @@ class LoginPage : AppCompatActivity() {
 
         // Set click listeners
         forgotPassword.setOnClickListener {
-            // Handle "Forgot password" click
-            // Implement your logic here
+            navigateToResetPass()
         }
 
         login.setOnClickListener {
-            login(username.text.toString(), password.text.toString()) { if (it) navigateToArticlesItem() }
+            login(username.text.toString(), password.text.toString()) { if (it) navigateToArticlesList() }
         }
 
         register1.setOnClickListener {

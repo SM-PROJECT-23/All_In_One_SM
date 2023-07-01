@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.textfield.TextInputEditText
+import okhttp3.Request
 
 class EditProfile : AppCompatActivity() {
     private lateinit var nameEditText: TextInputEditText
@@ -14,6 +15,44 @@ class EditProfile : AppCompatActivity() {
     private lateinit var oldPasswordEditText: TextInputEditText
     private lateinit var newPasswordEditText: TextInputEditText
     private lateinit var confirmPasswordEditText: TextInputEditText
+
+    private fun FetchUser(user: UserModel) {
+
+        val url = "http://192.168.1.64:3000/people"
+
+        val requestBody = """
+        {
+            "id": "${user.id}",
+            "name": "${user.name}",
+            "username": "${user.username}",
+            "email": "${user.email}",
+            "city": "${user.city}",
+            "country": "${user.country}",
+            "password": "${user.password}"  
+        }
+    """.trimIndent()
+
+        val client = okhttp3.OkHttpClient()
+
+        // Create a request with the JSON body
+        val request = Request.Builder()
+            .url(url)
+            .get()
+            .build()
+
+        // Make the API call in a coroutine to avoid blocking the main thread
+        try {
+            // Send the request and retrieve the response
+            val response = client.newCall(request).execute()
+
+            if (response.isSuccessful) {
+                println("Profile Open Successful!")
+            }
+
+        } catch (e: Exception) {
+            e.printStackTrace();
+        }
+    }
 
     private fun navigateToProfile() {
         val intent = Intent(this, Profile::class.java)
