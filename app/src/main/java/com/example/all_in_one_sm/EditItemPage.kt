@@ -4,10 +4,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Html
 import android.view.MenuItem
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class EditItemPage: AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
+
+    private lateinit var cancel2: Button
+    private lateinit var save2: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,6 +20,27 @@ class EditItemPage: AppCompatActivity(), BottomNavigationView.OnNavigationItemSe
 
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottomNavigation)
         bottomNavigationView.setOnNavigationItemSelectedListener(this)
+
+        cancel2 = findViewById(R.id.cancelbuttonEditPage)
+        save2 = findViewById(R.id.savebuttonEditPage)
+
+        cancel2.setOnClickListener {
+            navigateToYourItemPage1()
+        }
+
+        save2.setOnClickListener {
+            navigateToYourItemPage2()
+        }
+    }
+
+
+    private fun navigateToYourItemPage1(){
+        val intent = Intent(this, YourItemPage::class.java)
+        startActivity(intent)
+    }
+    private fun navigateToYourItemPage2(){
+        val intent = Intent(this, YourItemPage::class.java)
+        startActivity(intent)
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
