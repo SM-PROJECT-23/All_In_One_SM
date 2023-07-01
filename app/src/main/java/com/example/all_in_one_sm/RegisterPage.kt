@@ -9,6 +9,8 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.synthetic.main.editprofile.*
+import kotlinx.android.synthetic.main.register.*
 
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.IO
@@ -26,7 +28,7 @@ data class UserModel(
     @SerializedName("username")
     val email:String?="",
     @SerializedName("email")
-    var phoneNumber:String?= "",
+    var phoneNumber: UUID,
     @SerializedName("phoneNumber")
     val country:String?="",
     @SerializedName("country")
@@ -41,7 +43,7 @@ class RegisterPage : AppCompatActivity() {
     private lateinit var name: EditText
     private lateinit var username: EditText
     private lateinit var email: EditText
-    private lateinit var phone: EditText
+    //private lateinit var phone: EditText
     private lateinit var country: EditText
     private lateinit var city: EditText
     private lateinit var password: EditText
@@ -62,8 +64,8 @@ class RegisterPage : AppCompatActivity() {
             "name": "${user.name}",
             "username": "${user.username}",
             "email": "${user.email}",
+            "phone number": "${user.phoneNumber}",
             "city": "${user.city}",
-            "phone": "${user.phoneNumber}
             "country": "${user.country}",
             "password": "${user.password}",
             "confirm pass": "${user.confirmPassword}"   
@@ -118,7 +120,7 @@ class RegisterPage : AppCompatActivity() {
         name = findViewById(R.id.nameEditText)
         username = findViewById(R.id.usernameEditText)
         email = findViewById(R.id.emailEditText)
-      //  phone = findViewById(R.id.phoneEditText)
+        //phone = findViewById(R.id.phoneEditText)
         country = findViewById(R.id.countryEditText)
         city = findViewById(R.id.cityEditText)
         password = findViewById(R.id.passwordEditText)
@@ -137,7 +139,7 @@ class RegisterPage : AppCompatActivity() {
                     name.text.toString(),
                     username.text.toString(),
                     email.text.toString(),
-                  //  123098456,
+                    phoneNumber = UUID.randomUUID(),
                     country.text.toString(),
                     city.text.toString(),
                     password.text.toString(),

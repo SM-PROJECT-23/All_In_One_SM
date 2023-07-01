@@ -29,6 +29,27 @@
       "country": "123",
       "password": "abc",
       "confirm pass": "abc"
+    },
+    {
+      "id": "2a476713-12ca-4c5b-a041-5c43e61a880b",
+      "name": "xpto",
+      "username": "xpto",
+      "email": "xpto",
+      "city": "abc",
+      "country": "xpto",
+      "password": "abc",
+      "confirm pass": ""
+    },
+    {
+      "id": "06461166-086d-4ff9-8cb0-32e42fd3149f",
+      "name": "xpto",
+      "username": "xpto",
+      "email": "xpto",
+      "phone number": "9f8fb32d-6e86-4e30-a607-fcb0b6a000bf",
+      "city": "xpto",
+      "country": "xpto",
+      "password": "abc",
+      "confirm pass": "abc"
     }
   ]
 }
