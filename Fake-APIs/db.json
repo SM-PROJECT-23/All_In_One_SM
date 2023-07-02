@@ -51,5 +51,16 @@
       "password": "abc",
       "confirm pass": "abc"
     }
+  ],
+  "items": [
+    {
+      "id": "154db25f-0c73-4461-9c41-6f379628773a",
+      "titulo": "Colar",
+      "marca": "Zara",
+      "categoria": "Colares",
+      "tamanho": "Grande",
+      "cor": "Verde",
+      "estado": "Novo"
+    }
   ]
 }

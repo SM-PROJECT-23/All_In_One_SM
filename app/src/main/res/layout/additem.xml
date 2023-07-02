@@ -29,14 +29,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:layout_marginTop="250dp"
+        android:layout_marginTop="220dp"
         android:orientation="vertical">
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tituloTextInputLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="355dp"
-            android:layout_height="46dp"
+            android:layout_height="55dp"
             android:hint="Titulo">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -51,7 +51,7 @@
             android:id="@+id/marcaTextInputLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="355dp"
-            android:layout_height="46dp"
+            android:layout_height="55dp"
             android:hint="Marca">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -66,7 +66,7 @@
             android:id="@+id/categoriaTextInputLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="355dp"
-            android:layout_height="46dp"
+            android:layout_height="55dp"
             android:hint="Categoria">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -81,7 +81,7 @@
             android:id="@+id/tamanhoTextInputLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="355dp"
-            android:layout_height="46dp"
+            android:layout_height="55dp"
             android:hint="Tamanho">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -96,7 +96,7 @@
             android:id="@+id/corTextInputLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="355dp"
-            android:layout_height="46dp"
+            android:layout_height="55dp"
             android:hint="Cor">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -111,7 +111,7 @@
             android:id="@+id/estadoTextInputLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="355dp"
-            android:layout_height="46dp"
+            android:layout_height="55dp"
             android:hint="Estado">
 
             <com.google.android.material.textfield.TextInputEditText
