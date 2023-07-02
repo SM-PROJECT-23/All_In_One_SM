@@ -61,6 +61,15 @@
       "tamanho": "Grande",
       "cor": "Verde",
       "estado": "Novo"
+    },
+    {
+      "id": "1cb65db4-ef5a-4234-963c-9f3b8a557fe7",
+      "titulo": "",
+      "marca": "",
+      "categoria": "",
+      "tamanho": "",
+      "cor": "",
+      "estado": ""
     }
   ]
 }

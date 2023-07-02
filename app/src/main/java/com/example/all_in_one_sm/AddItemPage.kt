@@ -42,6 +42,7 @@ class AddItemPage: AppCompatActivity(), BottomNavigationView.OnNavigationItemSel
 
     private lateinit var cancel1: Button
     private lateinit var save1: Button
+    private lateinit var go1: Button
 
     private lateinit var titulo: EditText
     private lateinit var marca: EditText
@@ -105,6 +106,7 @@ class AddItemPage: AppCompatActivity(), BottomNavigationView.OnNavigationItemSel
 
         cancel1 = findViewById(R.id.cancelbuttonAddPage1)
         save1 = findViewById(R.id.savebuttonAddPage1)
+        go1 = findViewById(R.id.gobuttonAddPage1)
 
         titulo = findViewById(R.id.tituloEditText)
         marca = findViewById(R.id.marcaEditText)
@@ -112,6 +114,10 @@ class AddItemPage: AppCompatActivity(), BottomNavigationView.OnNavigationItemSel
         tamanho = findViewById(R.id.tamanhoEditText)
         cor = findViewById(R.id.corEditText)
         estado = findViewById(R.id.estadoEditText)
+
+        go1.setOnClickListener {
+            navigateToYourItemPage()
+        }
 
         cancel1.setOnClickListener {
             navigateToYourArticlePage()

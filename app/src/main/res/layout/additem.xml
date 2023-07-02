@@ -29,7 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:layout_marginTop="220dp"
+        android:layout_marginTop="200dp"
         android:orientation="vertical">
 
         <com.google.android.material.textfield.TextInputLayout
@@ -122,6 +122,15 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
+        <Button
+            android:id="@+id/gobuttonAddPage1"
+            android:layout_width="186dp"
+            android:layout_height="41dp"
+            android:text="Go to Your Items"
+            android:layout_marginTop="18dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_background" />
+
         <!-- Add your UI elements for the big part here -->
 
     </LinearLayout>
@@ -132,6 +141,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal">
+
 
         <Button
             android:id="@+id/cancelbuttonAddPage1"
