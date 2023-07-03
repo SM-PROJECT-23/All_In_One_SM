@@ -54,86 +54,218 @@
                 android:layout_width="wrap_content"
                 android:layout_height="10dp" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="start">
 
             <TextView
                 android:id="@+id/nameTextView"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
                 android:textColor="@android:color/black"
                 android:text="Name: " />
 
+                <TextView
+                    android:id="@+id/UserNameTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="UserName"
+                    android:textSize="18sp"
+                    android:textColor="#000000"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp" />
+
+            </LinearLayout>
+
             <Space
                 android:layout_width="wrap_content"
                 android:layout_height="20dp" />
 
-            <TextView
-                android:id="@+id/usernameTextView"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:textColor="@android:color/black"
-                android:text="Username: " />
+                android:orientation="horizontal"
+                android:gravity="start">
+
+                <TextView
+                    android:id="@+id/usernameTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:textColor="@android:color/black"
+                    android:text="Username: " />
+
+                <TextView
+                    android:id="@+id/usernameValueTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="UserName"
+                    android:textSize="18sp"
+                    android:textColor="#000000"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp" />
+
+            </LinearLayout>
 
             <Space
                 android:layout_width="wrap_content"
                 android:layout_height="20dp" />
 
-            <TextView
-                android:id="@+id/emailTextView"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:textColor="@android:color/black"
-                android:text="Email: " />
+                android:orientation="horizontal"
+                android:gravity="start">
+
+                <TextView
+                    android:id="@+id/emailTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:textColor="@android:color/black"
+                    android:text="Email: " />
+
+                <TextView
+                    android:id="@+id/emailValueTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Email"
+                    android:textSize="18sp"
+                    android:textColor="#000000"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp" />
+
+            </LinearLayout>
 
             <Space
                 android:layout_width="wrap_content"
                 android:layout_height="20dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="start">
 
             <TextView
                 android:id="@+id/phoneTextView"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
                 android:textColor="@android:color/black"
                 android:text="Phone Number: " />
 
+                <TextView
+                    android:id="@+id/PhonenumberTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Phone Number"
+                    android:textSize="18sp"
+                    android:textColor="#000000"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp" />
+
+            </LinearLayout>
+
             <Space
                 android:layout_width="wrap_content"
                 android:layout_height="20dp" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="start">
+
             <TextView
                 android:id="@+id/countryTextView"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
                 android:textColor="@android:color/black"
                 android:text="Country: " />
 
+                <TextView
+                    android:id="@+id/CountryTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Country"
+                    android:textSize="18sp"
+                    android:textColor="#000000"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp" />
+
+            </LinearLayout>
+
             <Space
                 android:layout_width="wrap_content"
                 android:layout_height="20dp" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="start">
+
             <TextView
                 android:id="@+id/cityTextView"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
                 android:textColor="@android:color/black"
                 android:text="City: " />
 
+                <TextView
+                    android:id="@+id/CityTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="City"
+                    android:textSize="18sp"
+                    android:textColor="#000000"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp" />
+
+            </LinearLayout>
+
             <Space
                 android:layout_width="wrap_content"
                 android:layout_height="20dp" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="start">
+
             <TextView
                 android:id="@+id/passwordTextView"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
                 android:textColor="@android:color/black"
                 android:text="Password: " />
+
+                <TextView
+                    android:id="@+id/passTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Password"
+                    android:textSize="18sp"
+                    android:textColor="#000000"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp" />
+
+            </LinearLayout>
 
             <Space
                 android:layout_width="wrap_content"

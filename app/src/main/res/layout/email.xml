@@ -8,7 +8,7 @@
         android:id="@+id/my_textview"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="130dp"
         android:layout_marginStart="50dp"
         android:text="Forgot Password"
         android:textSize="30sp"

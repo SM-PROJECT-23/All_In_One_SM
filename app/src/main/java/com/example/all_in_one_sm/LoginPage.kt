@@ -30,18 +30,17 @@ class LoginPage : AppCompatActivity() {
         startActivity(intent)
     }
 
-    private fun navigateToResetEmail() {
-        val intent = Intent(this, Email::class.java)
-        startActivity(intent)
-    }
-
     private fun navigateToRegister() {
         val intent = Intent(this, RegisterPage::class.java)
         startActivity(intent)
     }
 
+    private fun navigateToResetEmail() {
+        val intent = Intent(this, Email::class.java)
+        startActivity(intent)
+    }
+
     data class User(
-        //val userId: Int?=0,
         @SerializedName("username")
         val username:String?="",
         @SerializedName("password")
@@ -116,8 +115,6 @@ class LoginPage : AppCompatActivity() {
         register = findViewById(R.id.register_text)
         register1 = findViewById(R.id.register_text1)
 
-        val userString = username.text.toString()
-
         login = findViewById(R.id.login_button)
 
         register1.setTextColor(Color.parseColor("#1F63A6"));
@@ -128,10 +125,12 @@ class LoginPage : AppCompatActivity() {
         }
 
         login.setOnClickListener {
-            login(username.text.toString(), password.text.toString()) { if (it) navigateToArticlesItem() }
+            val userString = username.text.toString()
+
+            login(userString, password.text.toString()) { if (it) navigateToArticlesItem() }
 
             val prefs = this.getSharedPreferences("com.example.app", Context.MODE_PRIVATE)
-            prefs.edit().putString("name", userString).apply()
+            prefs.edit().putString("username", userString).apply()
         }
 
         register1.setOnClickListener {

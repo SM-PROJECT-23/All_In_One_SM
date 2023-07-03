@@ -51,24 +51,24 @@ class Profile : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelect
         startActivity(intent)
     }
 
-    @SuppressLint("SetTextI18n", "MissingInflatedId")
+    @SuppressLint("SetTextI18n", "MissingInflatedId", "CutPasteId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         supportActionBar?.title =
             Html.fromHtml("<font color=\"black\">" + getString(R.string.app_name) + "</font>")
         setContentView(R.layout.profile)
 
-        val prefs = PreferenceManager.getDefaultSharedPreferences(this)
-        val username = prefs.getString("username", "")
+        val prefs = this.getSharedPreferences("com.example.app", Context.MODE_PRIVATE)
+        val savedUsername = prefs.getString("username", null)
 
         // Initialize the views
-        nameTextView = findViewById(R.id.nameTextView)
+        nameTextView = findViewById(R.id.UserNameTextView)
         usernameTextView = findViewById(R.id.usernameTextView)
-        emailTextView = findViewById(R.id.emailTextView)
-        phoneTextView = findViewById(R.id.phoneTextView)
-        countryTextView = findViewById(R.id.countryTextView)
-        cityTextView = findViewById(R.id.cityTextView)
-        passwordTextView = findViewById(R.id.passwordTextView)
+        emailTextView = findViewById(R.id.emailValueTextView)
+        phoneTextView = findViewById(R.id.PhonenumberTextView)
+        countryTextView = findViewById(R.id.CountryTextView)
+        cityTextView = findViewById(R.id.CityTextView)
+        passwordTextView = findViewById(R.id.passTextView)
 
         // Set up the BottomNavigationView and edit button
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottomNavigation)
@@ -79,10 +79,9 @@ class Profile : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelect
             navigateToEditProfile()
         }
 
-        if (username != null) {
-            fetchUser(username) { user ->
+        if (savedUsername != null) {
+            fetchUser(savedUsername) { user ->
                 runOnUiThread {
-                    // Set the text of TextView elements with the item's properties
                     usernameTextView.text = user.username
                     nameTextView.text = user.name
                     emailTextView.text = user.email
@@ -93,40 +92,43 @@ class Profile : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelect
                 }
             }
         }
+
     }
 
     @SuppressLint("SuspiciousIndentation")
-    fun fetchUser(username: String, callback:(User) -> Unit) {
-
-        val baseUrl = "http://192.168.1.104:3000/people/$username"
+    private fun fetchUser(savedUsername: String, callback: (User) -> Unit) {
+        val url = "http://192.168.1.104:3000/items/$savedUsername"
+        val request = Request.Builder()
+            .url(url)
+            .build()
 
         val client = OkHttpClient()
-
-        val request = Request.Builder()
-            .url(baseUrl)
-            .build()
 
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 e.printStackTrace()
+                // Handle the failure case
             }
 
             override fun onResponse(call: Call, response: Response) {
                 response.body?.let { responseBody ->
                     val json = responseBody.string()
 
+                    // Parse the JSON response into an ItemModel object
                     val user = Gson().fromJson(json, User::class.java)
 
+                    // Invoke the callback with the retrieved item details
                     callback(user)
 
+                    // Update the UI with the retrieved item details
                     runOnUiThread {
-                        // Update the UI with the retrieved user details
+                        // Set the text of TextView elements with the item's properties
                         usernameTextView.text = user.username
                         nameTextView.text = user.name
                         emailTextView.text = user.email
-                        phoneTextView.text = user.phoneNumber
                         countryTextView.text = user.country
                         cityTextView.text = user.city
+                        phoneTextView.text = user.phoneNumber
                         passwordTextView.text = user.password
                     }
                 }
@@ -162,7 +164,6 @@ class Profile : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelect
                 startActivity(intent)
                 return true
             }
-            // Add more cases for each menu item
         }
         return false
     }

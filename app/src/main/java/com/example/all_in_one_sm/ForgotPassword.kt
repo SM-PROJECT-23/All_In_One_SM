@@ -1,5 +1,6 @@
 package com.example.all_in_one_sm
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.text.Html
@@ -19,6 +20,7 @@ class ForgotPassword : AppCompatActivity() {
         startActivity(intent)
     }
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         supportActionBar?.title = Html.fromHtml("<font color=\"white\">" + getString(R.string.app_name) + "</font>")
@@ -28,6 +30,7 @@ class ForgotPassword : AppCompatActivity() {
         OldPass = findViewById(R.id.usernameEditText)
         NewPass = findViewById(R.id.passwordNew)
         confPass = findViewById(R.id.passwordEditText)
+        forgot = findViewById(R.id.reset_button)
 
         forgot.setOnClickListener {
             navigateToLogin()
