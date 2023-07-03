@@ -12,7 +12,6 @@ import com.example.all_in_one_sm.YourArticle
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
-
 class MyAccount : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener  {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,7 +44,8 @@ class MyAccount : AppCompatActivity(), BottomNavigationView.OnNavigationItemSele
         }
 
         profileButton.setOnClickListener {
-            // Perform actions for the "Profile" button click
+            val intent = Intent(this, Profile::class.java)
+            startActivity(intent)
         }
 
         itemsButton.setOnClickListener {

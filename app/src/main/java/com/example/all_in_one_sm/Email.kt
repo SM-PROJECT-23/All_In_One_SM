@@ -22,7 +22,7 @@ class Email : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         supportActionBar?.title = Html.fromHtml("<font color=\"white\">" + getString(R.string.app_name) + "</font>")
-        setContentView(R.layout.forgotpassword)
+        setContentView(R.layout.email)
 
         // Initialize views
         OldPass = findViewById(R.id.usernameEditText)

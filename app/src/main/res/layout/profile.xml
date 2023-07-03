@@ -28,7 +28,7 @@
                 android:layout_marginBottom="10dp"
                 android:text="Profile"
                 android:textColor="@android:color/black"
-                android:textSize="24sp"
+                android:textSize="25sp"
                 android:textStyle="bold" />
 
             <Space
@@ -41,7 +41,7 @@
                 android:layout_marginBottom="10dp"
                 android:text="About Me"
                 android:textColor="@android:color/black"
-                android:textSize="20sp"
+                android:textSize="23sp"
                 android:textStyle="bold" />
 
             <View
@@ -59,6 +59,8 @@
                 android:id="@+id/nameTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="@android:color/black"
                 android:text="Name: " />
 
             <Space
@@ -69,6 +71,8 @@
                 android:id="@+id/usernameTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="@android:color/black"
                 android:text="Username: " />
 
             <Space
@@ -79,6 +83,8 @@
                 android:id="@+id/emailTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="@android:color/black"
                 android:text="Email: " />
 
             <Space
@@ -89,6 +95,8 @@
                 android:id="@+id/phoneTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="@android:color/black"
                 android:text="Phone Number: " />
 
             <Space
@@ -99,7 +107,21 @@
                 android:id="@+id/countryTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="@android:color/black"
                 android:text="Country: " />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="20dp" />
+
+            <TextView
+                android:id="@+id/cityTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="@android:color/black"
+                android:text="City: " />
 
             <Space
                 android:layout_width="wrap_content"
@@ -109,6 +131,8 @@
                 android:id="@+id/passwordTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="@android:color/black"
                 android:text="Password: " />
 
             <Space

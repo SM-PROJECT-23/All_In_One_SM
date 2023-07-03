@@ -1,12 +1,14 @@
 package com.example.all_in_one_sm
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Color
-import android.net.Uri
 import android.os.Bundle
 import android.text.Html
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.preference.PreferenceManager
 import com.google.gson.Gson
 import com.google.gson.annotations.SerializedName
 import com.google.gson.reflect.TypeToken
@@ -25,6 +27,11 @@ class LoginPage : AppCompatActivity() {
 
     private fun navigateToArticlesItem() {
         val intent = Intent(this, YourArticle::class.java)
+        startActivity(intent)
+    }
+
+    private fun navigateToResetEmail() {
+        val intent = Intent(this, Email::class.java)
         startActivity(intent)
     }
 
@@ -109,18 +116,22 @@ class LoginPage : AppCompatActivity() {
         register = findViewById(R.id.register_text)
         register1 = findViewById(R.id.register_text1)
 
+        val userString = username.text.toString()
+
         login = findViewById(R.id.login_button)
 
         register1.setTextColor(Color.parseColor("#1F63A6"));
 
         // Set click listeners
         forgotPassword.setOnClickListener {
-            // Handle "Forgot password" click
-            // Implement your logic here
+            navigateToResetEmail()
         }
 
         login.setOnClickListener {
             login(username.text.toString(), password.text.toString()) { if (it) navigateToArticlesItem() }
+
+            val prefs = this.getSharedPreferences("com.example.app", Context.MODE_PRIVATE)
+            prefs.edit().putString("name", userString).apply()
         }
 
         register1.setOnClickListener {
