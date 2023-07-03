@@ -5,8 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
-
-    <!-- Bottom half -->
+    <!-- Top half -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -36,52 +35,203 @@
             android:layout_marginEnd="8dp" />
 
         <!-- Fields -->
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Categoria:"
-            android:textSize="18sp"
-            android:textColor="#000000"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp" />
+            android:orientation="horizontal"
+            android:gravity="start">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Tamanho:"
-            android:textSize="18sp"
-            android:textColor="#000000"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp" />
+            <TextView
+                android:id="@+id/tituloTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Titulo:"
+                android:textSize="18sp"
+                android:textColor="#000000"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Cor:"
-            android:textSize="18sp"
-            android:textColor="#000000"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp" />
+            <TextView
+                android:id="@+id/itemTituloTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text=": Titulo"
+                android:textSize="18sp"
+                android:textColor="#000000"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Estado:"
-            android:textSize="18sp"
-            android:textColor="#000000"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp" />
+            android:orientation="horizontal"
+            android:gravity="start">
+
+            <TextView
+                android:id="@+id/marcaTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Marca:"
+                android:textSize="18sp"
+                android:textColor="#000000"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                android:id="@+id/itemMarcaTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text=": Marca"
+                android:textSize="18sp"
+                android:textColor="#000000"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp" />
+
+        </LinearLayout>
+
+        <!-- Repeat the same pattern for other fields -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="start">
+
+            <TextView
+                android:id="@+id/categoriaTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Categoria:"
+                android:textSize="18sp"
+                android:textColor="#000000"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                android:id="@+id/itemCategoriaTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text=": Categoria"
+                android:textSize="18sp"
+                android:textColor="#000000"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="start">
+
+            <TextView
+                android:id="@+id/tamanhoTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tamanho:"
+                android:textSize="18sp"
+                android:textColor="#000000"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                android:id="@+id/itemTamanhoTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text=": Tamanho"
+                android:textSize="18sp"
+                android:textColor="#000000"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="start">
+
+            <TextView
+                android:id="@+id/corTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cor:"
+                android:textSize="18sp"
+                android:textColor="#000000"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                android:id="@+id/itemCorTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text=": Cor"
+                android:textSize="18sp"
+                android:textColor="#000000"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="start">
+
+            <TextView
+                android:id="@+id/estadoTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Estado:"
+                android:textSize="18sp"
+                android:textColor="#000000"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                android:id="@+id/itemEstadoTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text=": Estado"
+                android:textSize="18sp"
+                android:textColor="#000000"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
+    <!-- Bottom half -->
     <LinearLayout
         android:id="@+id/bottomSection"
         android:layout_width="match_parent"
@@ -128,3 +278,4 @@
     </LinearLayout>
 
 </LinearLayout>
+
