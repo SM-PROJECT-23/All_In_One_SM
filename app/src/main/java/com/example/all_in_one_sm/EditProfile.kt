@@ -21,7 +21,7 @@ class EditProfile : AppCompatActivity(), BottomNavigationView.OnNavigationItemSe
 
     private fun FetchUser(user: UserModel) {
 
-        val url = "http://192.168.1.64:3000/people"
+        val url = "https://my-json-server.typicode.com/a41792/FakeApi/people"
 
         val requestBody = """
         {
@@ -73,7 +73,6 @@ class EditProfile : AppCompatActivity(), BottomNavigationView.OnNavigationItemSe
 
         nameEditText = findViewById(R.id.nameEditText)
         emailEditText = findViewById(R.id.emailEditEditText)
-        phoneEditText = findViewById(R.id.phoneEditText)
         countryEditText = findViewById(R.id.countryEditText)
         cityEditText = findViewById(R.id.cityEditText)
         oldPasswordEditText = findViewById(R.id.oldpasswordEditText)

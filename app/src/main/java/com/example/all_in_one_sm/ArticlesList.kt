@@ -1,14 +1,17 @@
 package com.example.all_in_one_sm
-
+import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.Html
 import android.view.MenuItem
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class ArticlesList : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
 
+    @SuppressLint("MissingInflatedId", "SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         getSupportActionBar()?.setTitle(Html.fromHtml("<font color=\"black\">" + getString(R.string.app_name) + "</font>"))
@@ -16,6 +19,12 @@ class ArticlesList : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottomNavigation)
         bottomNavigationView.setOnNavigationItemSelectedListener(this)
+
+        val prefs = this.getSharedPreferences("com.example.app", Context.MODE_PRIVATE)
+        val savedUsername = prefs.getString("username", null)
+
+        val displayNome = findViewById<TextView>(R.id.nameUser)
+        displayNome.text = "Hello $savedUsername"
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {

@@ -85,22 +85,6 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/PhoneTextInputLayout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Phone Number">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/phoneEditText"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:inputType="number"
-                android:drawableStart="@drawable/ic_phone" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/countrySpinner"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
@@ -205,7 +189,7 @@
             <Button
                 android:id="@+id/CancelButton"
                 android:layout_width="0dp"
-                android:layout_marginTop="0dp"
+                android:layout_marginTop="10dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Cancel" />
@@ -217,7 +201,7 @@
             <Button
                 android:id="@+id/SaveButton"
                 android:layout_width="0dp"
-                android:layout_marginTop="0dp"
+                android:layout_marginTop="10dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Save" />
