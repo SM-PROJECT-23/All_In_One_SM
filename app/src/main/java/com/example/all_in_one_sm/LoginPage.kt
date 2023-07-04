@@ -84,19 +84,19 @@ class LoginPage : AppCompatActivity() {
                     }
                     if (isUser){
                         //Toast.makeText(applicationContext, "Login Successful!", Toast.LENGTH_SHORT).show()
-                        println("Login com sucesso");
+                        println("Login com sucesso")
 
                         callback(true)
 
                     } else{
                         //Toast.makeText(applicationContext, "Login Failed!", Toast.LENGTH_SHORT).show()
-                        println("Erro no login");
+                        println("Erro no login")
                         callback(false)
                     }
                 }
 
             } catch (e: Exception) {
-                e.printStackTrace();
+                e.printStackTrace()
                 callback(false)
             }
         }
@@ -117,7 +117,7 @@ class LoginPage : AppCompatActivity() {
 
         login = findViewById(R.id.login_button)
 
-        register1.setTextColor(Color.parseColor("#1F63A6"));
+        register1.setTextColor(Color.parseColor("#1F63A6"))
 
         // Set click listeners
         forgotPassword.setOnClickListener {
