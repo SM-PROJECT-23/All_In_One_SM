@@ -1,4 +1,5 @@
 package com.example.all_in_one_sm
+import android.content.Context
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Color
@@ -6,6 +7,7 @@ import android.os.Bundle
 import android.text.Html
 import android.view.MenuItem
 import android.widget.Button
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.all_in_one_sm.YourArticle
@@ -36,11 +38,27 @@ class MyAccount : AppCompatActivity(), BottomNavigationView.OnNavigationItemSele
         addressButton.backgroundTintList = colorStateList
         profileButton.backgroundTintList = colorStateList
 
+        val prefs = this.getSharedPreferences("com.example.app", Context.MODE_PRIVATE)
+        val savedUsername = prefs.getString("username", null)
 
+        val displayNome = findViewById<TextView>(R.id.nameUser)
+        displayNome.text = "$savedUsername"
+
+        fun logout() {
+            // Clear any saved user session or preferences
+            val prefs = getSharedPreferences("com.example.all_in_one_sm", Context.MODE_PRIVATE)
+            prefs.edit().clear().apply()
+
+            // Navigate the user back to the login page
+            val intent = Intent(this, LoginPage::class.java)
+            startActivity(intent)
+            finish()
+        }
 
 
         ordersButton.setOnClickListener {
-            // Perform actions for the "Orders" button click
+            val intent = Intent(this, Orders::class.java)
+            startActivity(intent)
         }
 
         profileButton.setOnClickListener {
@@ -49,15 +67,17 @@ class MyAccount : AppCompatActivity(), BottomNavigationView.OnNavigationItemSele
         }
 
         itemsButton.setOnClickListener {
-            // Perform actions for the "Your Items" button click
+            val intent = Intent(this, YourItemPage::class.java)
+            startActivity(intent)
         }
 
         addressButton.setOnClickListener {
-            // Perform actions for the "Address Book" button click
+            val intent = Intent(this, AddressBook::class.java)
+            startActivity(intent)
         }
 
         logoutButton.setOnClickListener {
-            // Perform actions for the "Logout" button click
+            logout()
         }
     }
 
