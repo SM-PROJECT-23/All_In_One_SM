@@ -63,7 +63,7 @@ class Profile : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelect
 
         // Initialize the views
         nameTextView = findViewById(R.id.UserNameTextView)
-        usernameTextView = findViewById(R.id.usernameTextView)
+        usernameTextView = findViewById(R.id.usernameValueTextView)
         emailTextView = findViewById(R.id.emailValueTextView)
         phoneTextView = findViewById(R.id.PhonenumberTextView)
         countryTextView = findViewById(R.id.CountryTextView)
@@ -96,8 +96,8 @@ class Profile : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelect
     }
 
     @SuppressLint("SuspiciousIndentation")
-    private fun fetchUser(savedUsername: String, callback: (User) -> Unit) {
-        val url = "http://192.168.1.104:3000/items/$savedUsername"
+    private fun fetchUser(username: String?, callback: (User) -> Unit) {
+        val url = "http://194.210.110.146:3500/people?username=$username"
         val request = Request.Builder()
             .url(url)
             .build()
@@ -107,32 +107,27 @@ class Profile : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelect
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 e.printStackTrace()
-                // Handle the failure case
             }
+                override fun onResponse(call: Call, response: Response) {
+                    response.body?.let { responseBody ->
+                        val json = responseBody.string()
 
-            override fun onResponse(call: Call, response: Response) {
-                response.body?.let { responseBody ->
-                    val json = responseBody.string()
+                        // Parse the JSON response into an ItemModel object
+                        val user = Gson().fromJson(json, User::class.java)
 
-                    // Parse the JSON response into an ItemModel object
-                    val user = Gson().fromJson(json, User::class.java)
+                        callback(user)
 
-                    // Invoke the callback with the retrieved item details
-                    callback(user)
-
-                    // Update the UI with the retrieved item details
-                    runOnUiThread {
-                        // Set the text of TextView elements with the item's properties
-                        usernameTextView.text = user.username
-                        nameTextView.text = user.name
-                        emailTextView.text = user.email
-                        countryTextView.text = user.country
-                        cityTextView.text = user.city
-                        phoneTextView.text = user.phoneNumber
-                        passwordTextView.text = user.password
+                        runOnUiThread {
+                            usernameTextView.text = user.username
+                            nameTextView.text = user.name
+                            emailTextView.text = user.email
+                            countryTextView.text = user.country
+                            cityTextView.text = user.city
+                            phoneTextView.text = user.phoneNumber
+                            passwordTextView.text = user.password
+                        }
                     }
                 }
-            }
         })
     }
 

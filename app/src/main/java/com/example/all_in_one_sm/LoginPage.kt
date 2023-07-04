@@ -23,7 +23,7 @@ class LoginPage : AppCompatActivity() {
     private lateinit var login: Button
     private lateinit var register1: TextView
 
-    val baseUrl = "http://192.168.1.72:3000/people"
+    val baseUrl = "http://194.210.110.146:3500/people"
 
     private fun navigateToArticlesItem() {
         val intent = Intent(this, YourArticle::class.java)
