@@ -1,3 +1,4 @@
+package com.example.all_in_one_sm
 import android.content.Intent
 import android.os.Bundle
 import android.text.Html

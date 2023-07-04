@@ -39,7 +39,7 @@ class YourItemPage: AppCompatActivity(), BottomNavigationView.OnNavigationItemSe
     }
 
     private fun fetchItemDetails(itemId: String, callback: (ItemModel) -> Unit) {
-        val url = "http://192.168.1.72:3000/items/$itemId"
+        val url = "https://my-json-server.typicode.com/a41792/FakeApi/items/$itemId"
         val request = Request.Builder()
             .url(url)
             .build()

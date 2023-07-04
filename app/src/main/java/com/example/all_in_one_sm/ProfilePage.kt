@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Parcel
+import android.os.Parcelable
 import android.text.Html
 import android.view.MenuItem
 import android.widget.Button
@@ -23,6 +25,53 @@ import java.io.InputStreamReader
 import java.net.HttpURLConnection
 import java.net.URL
 
+data class UserEP(
+    @SerializedName("name")
+    val name: String?,
+    @SerializedName("username")
+    val username: String?,
+    @SerializedName("password")
+    val password: String?,
+    @SerializedName("email")
+    var email: String?,
+    @SerializedName("country")
+    val country: String?,
+    @SerializedName("city")
+    val city: String?
+) : Parcelable {
+    constructor(parcel: Parcel) : this(
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString()
+    )
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeString(name)
+        parcel.writeString(username)
+        parcel.writeString(password)
+        parcel.writeString(email)
+        parcel.writeString(country)
+        parcel.writeString(city)
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<UserEP> {
+        override fun createFromParcel(parcel: Parcel): UserEP {
+            return UserEP(parcel)
+        }
+
+        override fun newArray(size: Int): Array<UserEP?> {
+            return arrayOfNulls(size)
+        }
+    }
+}
+
 data class User(
     @SerializedName("name")
     val name: String?,
@@ -36,20 +85,55 @@ data class User(
     val country: String?,
     @SerializedName("city")
     val city: String?
-)
+) : Parcelable {
+    constructor(parcel: Parcel) : this(
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString()
+    )
 
-class Profile : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeString(name)
+        parcel.writeString(username)
+        parcel.writeString(password)
+        parcel.writeString(email)
+        parcel.writeString(country)
+        parcel.writeString(city)
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<User> {
+        override fun createFromParcel(parcel: Parcel): User {
+            return User(parcel)
+        }
+
+        override fun newArray(size: Int): Array<User?> {
+            return arrayOfNulls(size)
+        }
+    }
+}
+
+class ProfilePage : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var nameTextView: TextView
     private lateinit var usernameTextView: TextView
     private lateinit var emailTextView: TextView
-    private lateinit var phoneTextView: TextView
     private lateinit var countryTextView: TextView
     private lateinit var cityTextView: TextView
     private lateinit var passwordTextView: TextView
 
+    private lateinit var user: User
+    private lateinit var userEP: UserEP
+
     private fun navigateToEditProfile() {
         val intent = Intent(this, EditProfile::class.java)
+        intent.putExtra("currentUser", user)
         startActivity(intent)
     }
 
@@ -93,15 +177,13 @@ class Profile : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelect
 
         if (savedUsername != null) {
             GlobalScope.launch(Dispatchers.Main) {
-                val user = fetchUser(savedUsername)
-                if (user != null) {
-                    displayUserInfo(user)
-                }
+                user = fetchUser(savedUsername)!!
+                displayUserInfo(user)
             }
         }
     }
     @SuppressLint("SuspiciousIndentation")
-    suspend fun fetchUser(username : String): User? {
+    suspend fun fetchUser(username: String): User? {
         val apiUrl = "https://my-json-server.typicode.com/a41792/FakeApi/people?username=$username"
 
         val request = Request.Builder()
@@ -116,10 +198,18 @@ class Profile : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelect
                 val json = response.body?.string()
 
                 if (response.isSuccessful && !json.isNullOrEmpty()) {
-                    // Assuming the JSON response is an array of people objects
-                    val people = parseJsonArray(json)
-                    if (people.isNotEmpty()) {
-                        return@withContext people[0]
+                    // Assuming the JSON response is an array of user objects
+                    val users = parseJsonArray(json)
+                    if (users.isNotEmpty()) {
+                        val userEP = users[0]
+                        return@withContext User(
+                            name = userEP.name,
+                            username = userEP.username,
+                            password = userEP.password,
+                            email = userEP.email,
+                            country = userEP.country,
+                            city = userEP.city
+                        )
                     }
                 } else {
                     println("Failed to fetch user information. Response code: ${response.code}")
@@ -133,10 +223,11 @@ class Profile : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelect
         }
     }
 
-    fun parseJsonArray(json: String): List<User> {
-        val listType = object : TypeToken<List<User>>() {}.type
+    private fun parseJsonArray(json: String): List<UserEP> {
+        val listType = object : TypeToken<List<UserEP>>() {}.type
         return Gson().fromJson(json, listType)
     }
+
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation item clicks
