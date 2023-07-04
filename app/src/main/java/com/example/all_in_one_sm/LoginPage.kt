@@ -23,10 +23,10 @@ class LoginPage : AppCompatActivity() {
     private lateinit var login: Button
     private lateinit var register1: TextView
 
-    val baseUrl = "http://192.168.1.72:3000/people"
+    val baseUrl = "https://my-json-server.typicode.com/a41792/SMapi/people"
 
     private fun navigateToArticlesItem() {
-        val intent = Intent(this, YourArticle::class.java)
+        val intent = Intent(this, ArticlesList::class.java)
         startActivity(intent)
     }
 
