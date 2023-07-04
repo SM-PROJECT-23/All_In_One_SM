@@ -13,11 +13,15 @@ import androidx.preference.PreferenceManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.gson.Gson
 import com.google.gson.annotations.SerializedName
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import com.google.gson.reflect.TypeToken
+import kotlinx.coroutines.*
+import kotlinx.serialization.decodeFromString
 import okhttp3.*
+import java.io.BufferedReader
 import java.io.IOException
+import java.io.InputStreamReader
+import java.net.HttpURLConnection
+import java.net.URL
 
 data class User(
     @SerializedName("name")
@@ -28,8 +32,6 @@ data class User(
     val password: String?,
     @SerializedName("email")
     var email: String?,
-    @SerializedName("phoneNumber")
-    var phoneNumber: String?,
     @SerializedName("country")
     val country: String?,
     @SerializedName("city")
@@ -51,6 +53,17 @@ class Profile : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelect
         startActivity(intent)
     }
 
+    private fun displayUserInfo(user: User) {
+        nameTextView.text = user.name
+        usernameTextView.text = user.username
+        emailTextView.text = user.email
+        countryTextView.text = user.country
+        cityTextView.text = user.city
+        passwordTextView.text = user.password
+    }
+
+
+    @OptIn(DelicateCoroutinesApi::class)
     @SuppressLint("SetTextI18n", "MissingInflatedId", "CutPasteId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,7 +78,6 @@ class Profile : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelect
         nameTextView = findViewById(R.id.UserNameTextView)
         usernameTextView = findViewById(R.id.usernameValueTextView)
         emailTextView = findViewById(R.id.emailValueTextView)
-        phoneTextView = findViewById(R.id.PhonenumberTextView)
         countryTextView = findViewById(R.id.CountryTextView)
         cityTextView = findViewById(R.id.CityTextView)
         passwordTextView = findViewById(R.id.passTextView)
@@ -80,55 +92,50 @@ class Profile : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelect
         }
 
         if (savedUsername != null) {
-            fetchUser(savedUsername) { user ->
-                runOnUiThread {
-                    usernameTextView.text = user.username
-                    nameTextView.text = user.name
-                    emailTextView.text = user.email
-                    phoneTextView.text = user.phoneNumber
-                    cityTextView.text = user.city
-                    countryTextView.text = user.country
-                    passwordTextView.text = user.password
+            GlobalScope.launch(Dispatchers.Main) {
+                val user = fetchUser(savedUsername)
+                if (user != null) {
+                    displayUserInfo(user)
                 }
             }
         }
-
     }
-
     @SuppressLint("SuspiciousIndentation")
-    private fun fetchUser(username: String?, callback: (User) -> Unit) {
-        val url = "http://194.210.110.146:3500/people?username=$username"
+    suspend fun fetchUser(username : String): User? {
+        val apiUrl = "https://my-json-server.typicode.com/a41792/FakeApi/people?username=$username"
+
         val request = Request.Builder()
-            .url(url)
+            .url(apiUrl)
             .build()
 
         val client = OkHttpClient()
 
-        client.newCall(request).enqueue(object : Callback {
-            override fun onFailure(call: Call, e: IOException) {
-                e.printStackTrace()
-            }
-                override fun onResponse(call: Call, response: Response) {
-                    response.body?.let { responseBody ->
-                        val json = responseBody.string()
+        return withContext(Dispatchers.IO) {
+            try {
+                val response = client.newCall(request).execute()
+                val json = response.body?.string()
 
-                        // Parse the JSON response into an ItemModel object
-                        val user = Gson().fromJson(json, User::class.java)
-
-                        callback(user)
-
-                        runOnUiThread {
-                            usernameTextView.text = user.username
-                            nameTextView.text = user.name
-                            emailTextView.text = user.email
-                            countryTextView.text = user.country
-                            cityTextView.text = user.city
-                            phoneTextView.text = user.phoneNumber
-                            passwordTextView.text = user.password
-                        }
+                if (response.isSuccessful && !json.isNullOrEmpty()) {
+                    // Assuming the JSON response is an array of people objects
+                    val people = parseJsonArray(json)
+                    if (people.isNotEmpty()) {
+                        return@withContext people[0]
                     }
+                } else {
+                    println("Failed to fetch user information. Response code: ${response.code}")
                 }
-        })
+            } catch (e: IOException) {
+                // Handle network request failure
+                e.printStackTrace()
+                println("Failed to fetch user information: ${e.message}")
+            }
+            return@withContext null
+        }
+    }
+
+    fun parseJsonArray(json: String): List<User> {
+        val listType = object : TypeToken<List<User>>() {}.type
+        return Gson().fromJson(json, listType)
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {

@@ -56,7 +56,7 @@ class RegisterPage : AppCompatActivity() {
     @OptIn(DelicateCoroutinesApi::class)
     private fun registerUser(user: UserModel) {
 
-        val url = "http://192.168.1.104:3000/people"
+        val url = "https://my-json-server.typicode.com/a41792/FakeApi/people"
 
         val requestBody = """
         {
