@@ -1,6 +1,5 @@
 package com.example.all_in_one_sm
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.text.Html
@@ -13,10 +12,15 @@ import android.widget.ListView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import android.content.Context
+import android.content.SharedPreferences
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 
 class AddressAdded : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var addressList: ArrayList<Address>  // Replace with your Address class
+    private lateinit var preferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,11 +30,7 @@ class AddressAdded : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottomNavigation)
         bottomNavigationView.setOnNavigationItemSelectedListener(this)
 
-        // TODO: Retrieve your list of addresses here
-        addressList = arrayListOf()  // Fill with your data
-
-        val addressListView: ListView = findViewById(R.id.addressListView)
-        addressListView.adapter = AddressAdapter()
+        preferences = getSharedPreferences("AddressBook", Context.MODE_PRIVATE)
 
         val addAddressButton: Button = findViewById(R.id.addAddressButton)
         addAddressButton.setOnClickListener {
@@ -38,6 +38,28 @@ class AddressAdded : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
             val intent = Intent(this, AddressBook::class.java)
             startActivity(intent)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        retrieveAddressesFromSharedPreferences()
+        updateAddressListView()
+    }
+
+    private fun retrieveAddressesFromSharedPreferences() {
+        val addressJson = preferences.getString("addressList", "")
+        if (addressJson != null && addressJson.isNotEmpty()) {
+            val gson = Gson()
+            val addressesType = object : TypeToken<ArrayList<Address>>() {}.type
+            addressList = gson.fromJson(addressJson, addressesType)
+        } else {
+            addressList = ArrayList()
+        }
+    }
+
+    private fun updateAddressListView() {
+        val addressListView: ListView = findViewById(R.id.addressListView)
+        addressListView.adapter = AddressAdapter()
     }
 
     inner class AddressAdapter : BaseAdapter() {
@@ -53,12 +75,10 @@ class AddressAdded : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
             return position.toLong()
         }
 
-        @SuppressLint("ViewHolder")
         override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
             val view = layoutInflater.inflate(R.layout.address_item, null)
 
             val addressInfo: TextView = view.findViewById(R.id.addressInfo)
-            val editLink: TextView = view.findViewById(R.id.editLink)
             val removeLink: TextView = view.findViewById(R.id.removeLink)
 
             val address = addressList[position]
@@ -66,16 +86,27 @@ class AddressAdded : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
             // Set your address info here
             addressInfo.text = "${address.name}, ${address.address}, ${address.city}, ${address.state}, ${address.postalCode}"
 
-            editLink.setOnClickListener {
-                // Handle your Edit action here
-            }
-
             removeLink.setOnClickListener {
                 // Handle your Remove action here
+                removeAddress(position)
             }
 
             return view
         }
+    }
+
+    private fun removeAddress(position: Int) {
+        addressList.removeAt(position)
+        saveAddressesToSharedPreferences()
+        updateAddressListView()
+    }
+
+    private fun saveAddressesToSharedPreferences() {
+        val editor = preferences.edit()
+        val gson = Gson()
+        val addressJson = gson.toJson(addressList)
+        editor.putString("addressList", addressJson)
+        editor.apply()
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -110,5 +141,4 @@ class AddressAdded : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         }
         return false
     }
-
 }

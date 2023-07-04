@@ -70,7 +70,7 @@ class MyAccount : AppCompatActivity(), BottomNavigationView.OnNavigationItemSele
         }
 
         addressButton.setOnClickListener {
-            val intent = Intent(this, AddressBook::class.java)
+            val intent = Intent(this, AddressAdded::class.java)
             startActivity(intent)
         }
 
