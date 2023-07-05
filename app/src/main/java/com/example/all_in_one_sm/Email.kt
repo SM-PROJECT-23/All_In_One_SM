@@ -3,21 +3,20 @@ package com.example.all_in_one_sm
 import android.content.Intent
 import android.os.Bundle
 import android.text.Html
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 import com.github.kittinunf.fuel.Fuel
 import com.github.kittinunf.fuel.core.isSuccessful
 import com.google.android.material.textfield.TextInputEditText
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 import org.json.JSONArray
-import java.util.*
 
 class Email : AppCompatActivity() {
 
-    private lateinit var OldPass: TextInputEditText
     private lateinit var goReset: Button
 
     private fun navigateToResetPass() {
@@ -25,55 +24,64 @@ class Email : AppCompatActivity() {
         startActivity(intent)
     }
 
-    private fun getUsernameFromAPI(): String? {
-        var username: String? = null
-        val (_, response, result) = Fuel.get("https://my-json-server.typicode.com/a41792/FakeApi/people")
-            .responseString()
+    private suspend fun getUsernameFromAPI(): List<String> {
+        return withContext(Dispatchers.IO) {
+            val usernames = mutableListOf<String>()
+            val (_, response, result) = Fuel.get("https://my-json-server.typicode.com/a41792/FakeApi/people")
+                .responseString()
 
-        if (response.isSuccessful) {
-            val data = result.get()
-            val jsonArray = JSONArray(data)
-
-            if (jsonArray.length() > 0) {
-                val usernames = mutableListOf<String>()
+            if (response.isSuccessful) {
+                val data = result.get()
+                val jsonArray = JSONArray(data)
 
                 for (i in 0 until jsonArray.length()) {
                     val jsonObject = jsonArray.getJSONObject(i)
                     val nameUser = jsonObject.getString("username")
                     usernames.add(nameUser)
                 }
-
-                val random = Random()
-                val randomIndex = random.nextInt(usernames.size)
-                username = usernames[randomIndex]
+            } else {
+                println("Email not found!")
             }
-        } else {
-            println("Email not found!")
-        }
 
-        return username
+            usernames
+        }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) = runBlocking<Unit> {
+    @OptIn(DelicateCoroutinesApi::class)
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         supportActionBar?.title =
-            Html.fromHtml("<font color=\"white\">" + getString(R.string.app_name) + "</font>")
+            Html.fromHtml("<font color=\"black\">" + getString(R.string.app_name) + "</font>")
         setContentView(R.layout.email)
 
         // Initialize views
-        OldPass = findViewById(R.id.usernameEditText)
         goReset = findViewById(R.id.login_button1)
 
         // Call the function to set the random username to the EditText view using a coroutine
-        launch(Dispatchers.IO) {
-            val username = getUsernameFromAPI()
+        GlobalScope.launch(Dispatchers.IO) {
+            val usernames = getUsernameFromAPI()
 
             withContext(Dispatchers.Main) {
-                if (username != null) {
-                    // Set the retrieved username to the TextInputEditText view with ID "usernameEditText"
-                    OldPass.setText(username)
+                if (usernames.isNotEmpty()) {
+                    // Display the usernames in a dropdown list
+                    val spinner: Spinner = findViewById(R.id.userSpinner)
+                    val adapter = ArrayAdapter(this@Email, android.R.layout.simple_spinner_item, usernames)
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                    spinner.adapter = adapter
+
+                    // Set a listener to handle user selection
+                    spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                        override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                            val selectedUsername = parent.getItemAtPosition(position) as String
+                            //OldPass.setText(selectedUsername)
+                        }
+
+                        override fun onNothingSelected(parent: AdapterView<*>) {
+                            // Handle the case when no username is selected
+                        }
+                    }
                 } else {
-                    // Handle the case when no username is retrieved
+                    // Handle the case when no usernames are retrieved
                 }
             }
         }

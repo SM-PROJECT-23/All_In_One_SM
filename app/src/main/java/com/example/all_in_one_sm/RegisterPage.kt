@@ -28,7 +28,7 @@ data class UserModel(
     @SerializedName("username")
     val email:String?="",
     @SerializedName("email")
-    var phoneNumber: UUID,
+    var phoneNumber: String,
     @SerializedName("phoneNumber")
     val country:String?="",
     @SerializedName("country")
@@ -43,7 +43,7 @@ class RegisterPage : AppCompatActivity() {
     private lateinit var name: EditText
     private lateinit var username: EditText
     private lateinit var email: EditText
-    //private lateinit var phone: EditText
+    private lateinit var phone: EditText
     private lateinit var country: EditText
     private lateinit var city: EditText
     private lateinit var password: EditText
@@ -120,7 +120,7 @@ class RegisterPage : AppCompatActivity() {
         name = findViewById(R.id.nameEditText)
         username = findViewById(R.id.usernameEditText)
         email = findViewById(R.id.emailEditText)
-        //phone = findViewById(R.id.phoneEditText)
+        phone = findViewById(R.id.EditTextPhone)
         country = findViewById(R.id.countryEditText)
         city = findViewById(R.id.cityEditText)
         password = findViewById(R.id.passwordEditText)
@@ -139,7 +139,7 @@ class RegisterPage : AppCompatActivity() {
                     name.text.toString(),
                     username.text.toString(),
                     email.text.toString(),
-                    phoneNumber = UUID.randomUUID(),
+                    phone.text.toString(),
                     country.text.toString(),
                     city.text.toString(),
                     password.text.toString(),

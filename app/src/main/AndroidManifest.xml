@@ -31,10 +31,12 @@
             android:exported="false"/>
         <activity
             android:name=".Email"
-            android:exported="false"/>
+            android:exported="false"
+            android:parentActivityName=".LoginPage"/>
         <activity
             android:name=".ForgotPassword"
-            android:exported="false"/>
+            android:exported="false"
+            android:parentActivityName=".Email"/>
         <activity
             android:name=".LoginPage"
             android:exported="true"/>
