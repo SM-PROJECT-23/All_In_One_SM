@@ -127,15 +127,9 @@ class ProfilePage : AppCompatActivity(), BottomNavigationView.OnNavigationItemSe
         val savedCountry = prefs.getString("country", null)
         val savedCity = prefs.getString("city", null)
 
-        if (savedUsername != null && savedName != null && savedEmail != null && savedPassword != null && savedCountry != null && savedCity != null) {
-            user = User(savedName, savedUsername, savedPassword, savedEmail, savedCountry, savedCity)
-            displayUserInfo(user)
-        }
-
         if (!isUserDataUpdated && savedUsername != null) {
             GlobalScope.launch(Dispatchers.Main) {
                 user = fetchUser(savedUsername)!!
-                displayUserInfo(user)
             }
         }
 
@@ -147,13 +141,6 @@ class ProfilePage : AppCompatActivity(), BottomNavigationView.OnNavigationItemSe
         editButton.setOnClickListener {
             navigateToEditProfile()
         }
-
-        if (savedUsername != null) {
-            GlobalScope.launch(Dispatchers.Main) {
-                user = fetchUser(savedUsername)!!
-                displayUserInfo(user)
-            }
-        }
     }
 
     override fun onResume() {
@@ -163,9 +150,18 @@ class ProfilePage : AppCompatActivity(), BottomNavigationView.OnNavigationItemSe
         val updatedUser: User? = intent.getParcelableExtra("updatedUser")
 
         if (updatedUser != null) {
+            user = updatedUser
             currentUser = updatedUser
             displayUserInfo(currentUser)
             isUserDataUpdated = true
+
+            // Save updated data
+            val prefs = this.getSharedPreferences("com.example.app", Context.MODE_PRIVATE)
+            val editor = prefs.edit()
+            val gson = Gson()
+            val json = gson.toJson(currentUser)
+            editor.putString("userData", json)
+            editor.apply()
         } else if (!isUserDataUpdated) {
             // Fetch user data from the saved username
             val prefs = this.getSharedPreferences("com.example.app", Context.MODE_PRIVATE)
