@@ -1,5 +1,4 @@
 package com.example.all_in_one_sm
-
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -18,9 +17,9 @@ class EditProfile : AppCompatActivity(), BottomNavigationView.OnNavigationItemSe
     private lateinit var oldPasswordEditText: TextInputEditText
     private lateinit var newPasswordEditText: TextInputEditText
     private lateinit var confirmPasswordEditText: TextInputEditText
-    private lateinit var currentUser: UserEP
+    private lateinit var currentUser: User
 
-    private fun navigateToProfile(updatedUser: UserEP) {
+    private fun navigateToProfile(updatedUser: User) {
         val intent = Intent(this, ProfilePage::class.java)
         intent.putExtra("updatedUser", updatedUser)
         startActivity(intent)
@@ -28,16 +27,29 @@ class EditProfile : AppCompatActivity(), BottomNavigationView.OnNavigationItemSe
     }
 
     private fun updateUser(name: String, email: String, city: String, country: String, pass: String) {
-        println("Updated name: $name")
-        println("Updated email: $email")
-        println("Updated country: $country")
-        println("Updated city: $city")
-        println("Updated password: $pass")
+        currentUser.name = name
+        currentUser.email = email
+        currentUser.city = city
+        currentUser.country = country
+        currentUser.password = pass
+    }
+
+    private fun saveUserToPrefs(user: User) {
+        val prefs = this.getSharedPreferences("com.example.app", Context.MODE_PRIVATE)
+        val editor = prefs.edit()
+        editor.putString("name", user.name)
+        editor.putString("username", user.username)
+        editor.putString("password", user.password)
+        editor.putString("email", user.email)
+        editor.putString("country", user.country)
+        editor.putString("city", user.city)
+        editor.apply()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        supportActionBar?.title = Html.fromHtml("<font color=\"black\">" + getString(R.string.app_name) + "</font>")
+        supportActionBar?.title =
+            Html.fromHtml("<font color=\"black\">" + getString(R.string.app_name) + "</font>")
         setContentView(R.layout.editprofile)
 
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottomNavigation)
@@ -73,18 +85,32 @@ class EditProfile : AppCompatActivity(), BottomNavigationView.OnNavigationItemSe
             val updatedEmail = emailEditText.text.toString()
             val updatedCountry = countryEditText.text.toString()
             val updatedCity = cityEditText.text.toString()
-            val updatedPass = confirmPasswordEditText.text.toString()
+            val updatedPass = if (newPasswordEditText.text.toString().isNotEmpty()) {
+                confirmPasswordEditText.text.toString()
+            } else {
+                currentUser.password
+            }
 
             // Perform validation if needed
             if (updatedName.isNotEmpty() && updatedEmail.isNotEmpty()) {
                 // Update the user information
-                updateUser(updatedName, updatedEmail, updatedCountry, updatedCity, updatedPass)
+                if (updatedPass != null) {
+                    updateUser(updatedName, updatedEmail, updatedCountry, updatedCity, updatedPass)
+                }
                 println("Update successful!")
 
                 // Create the updated user object
-                val updatedUser = UserEP(updatedName, savedUsername, updatedPass, updatedEmail, updatedCountry, updatedCity)
+                val updatedUser = User(
+                    updatedName,
+                    savedUsername,
+                    updatedPass,
+                    updatedEmail,
+                    updatedCountry,
+                    updatedCity
+                )
 
                 // Navigate to the Profile page and pass the updated user object
+                saveUserToPrefs(updatedUser)
                 navigateToProfile(updatedUser)
 
                 // Finish the activity
@@ -93,23 +119,24 @@ class EditProfile : AppCompatActivity(), BottomNavigationView.OnNavigationItemSe
                 println("Validation failed!")
             }
         }
+
     }
 
-    private fun displayUserInfo(user: UserEP) {
+    private fun displayUserInfo(user: User) {
         nameEditText.setText(user.name)
         emailEditText.setText(user.email)
         countryEditText.setText(user.country)
         cityEditText.setText(user.city)
-        oldPasswordEditText.setText(user.password)
-        newPasswordEditText.setText(user.password)
-        confirmPasswordEditText.setText(user.password)
+        oldPasswordEditText.setText("")
+        newPasswordEditText.setText("")
+        confirmPasswordEditText.setText("")
     }
 
-    private fun getUserData(username: String?): UserEP? {
+    private fun getUserData(username: String?): User? {
         val userList = listOf(
-            UserEP("hello", "ola", "abc", "ola@teste.com", "br", "pt"),
-            UserEP("test", "teste", "abc", "teste@test.com", "br", "pt"),
-            UserEP("xripiti", "xpto", "abc", "xpto@test.com", "br", "pt")
+            User("hello", "ola", "abc", "ola@teste.com", "br", "pt"),
+            User("test", "teste", "abc", "teste@test.com", "br", "pt"),
+            User("xripiti", "xpto", "abc", "xpto@test.com", "br", "pt")
         )
 
 
