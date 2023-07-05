@@ -122,7 +122,7 @@ class ProfilePage : AppCompatActivity(), BottomNavigationView.OnNavigationItemSe
         nameTextView = findViewById(R.id.UserNameTextView)
         usernameTextView = findViewById(R.id.usernameValueTextView)
         emailTextView = findViewById(R.id.emailValueTextView)
-        phoneTextView = findViewById(R.id.PNTextView)
+        phoneTextView = findViewById(R.id.PNValueTextView)
         countryTextView = findViewById(R.id.CountryTextView)
         cityTextView = findViewById(R.id.CityTextView)
         passwordTextView = findViewById(R.id.passTextView)

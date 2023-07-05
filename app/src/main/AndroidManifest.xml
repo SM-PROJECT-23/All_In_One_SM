@@ -28,7 +28,8 @@
             android:exported="false"/>
         <activity
             android:name=".ProfilePage"
-            android:exported="false"/>
+            android:exported="false"
+            android:parentActivityName=".MyAccount"/>
         <activity
             android:name=".Email"
             android:exported="false"

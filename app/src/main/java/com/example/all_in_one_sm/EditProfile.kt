@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.text.Html
 import android.view.MenuItem
 import android.widget.Button
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.textfield.TextInputEditText
@@ -103,15 +104,14 @@ class EditProfile : AppCompatActivity(), BottomNavigationView.OnNavigationItemSe
                 if (updatedPass != null) {
                     updateUser(updatedName, updatedEmail, updatedCountry, updatedCity, updatedPN, updatedPass)
                 }
-                println("Update successful!")
-
+                Toast.makeText(this, "Update successful!", Toast.LENGTH_LONG).show()
                 // Create the updated user object
                 val updatedUser = User(
                     updatedName,
                     savedUsername,
                     updatedPass,
-                    updatedPN,
                     updatedEmail,
+                    updatedPN,
                     updatedCountry,
                     updatedCity
                 )
@@ -123,7 +123,7 @@ class EditProfile : AppCompatActivity(), BottomNavigationView.OnNavigationItemSe
                 // Finish the activity
                 finish()
             } else {
-                println("Validation failed!")
+                Toast.makeText(this, "Validation failed!", Toast.LENGTH_LONG).show()
             }
         }
 

@@ -6,6 +6,7 @@
 
     <ImageView
         android:id="@+id/itemImageView"
+        android:src="@drawable/reddress"
         android:layout_width="100dp"
         android:layout_height="100dp" />
 
