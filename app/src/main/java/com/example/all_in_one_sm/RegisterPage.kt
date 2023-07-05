@@ -7,6 +7,7 @@ import android.text.Html
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.synthetic.main.editprofile.*
@@ -90,9 +91,9 @@ class RegisterPage : AppCompatActivity() {
                 val registerResponse = response.body?.string()
 
                 if (response.isSuccessful) {
-                    println("Registration Successful!")
+                    Toast.makeText(this, "Registration Successful!", Toast.LENGTH_LONG).show()
                 }else {
-                    println("Registration Failed. Response Code: $registerResponse")
+                    Toast.makeText(this, "Registration Failed. Response Code: $registerResponse", Toast.LENGTH_LONG).show()
                 }
 
             } catch (e: Exception) {
