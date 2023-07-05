@@ -8,12 +8,14 @@ import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.textfield.TextInputEditText
+import kotlinx.android.synthetic.main.editprofile.*
 
 class EditProfile : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
     private lateinit var nameEditText: TextInputEditText
     private lateinit var emailEditText: TextInputEditText
     private lateinit var countryEditText: TextInputEditText
     private lateinit var cityEditText: TextInputEditText
+    private lateinit var phoneEditText: TextInputEditText
     private lateinit var oldPasswordEditText: TextInputEditText
     private lateinit var newPasswordEditText: TextInputEditText
     private lateinit var confirmPasswordEditText: TextInputEditText
@@ -26,9 +28,10 @@ class EditProfile : AppCompatActivity(), BottomNavigationView.OnNavigationItemSe
         finish()
     }
 
-    private fun updateUser(name: String, email: String, city: String, country: String, pass: String) {
+    private fun updateUser(name: String, email: String, phone: String, city: String, country: String, pass: String) {
         currentUser.name = name
         currentUser.email = email
+        currentUser.phone = phone
         currentUser.city = city
         currentUser.country = country
         currentUser.password = pass
@@ -41,6 +44,7 @@ class EditProfile : AppCompatActivity(), BottomNavigationView.OnNavigationItemSe
         editor.putString("username", user.username)
         editor.putString("password", user.password)
         editor.putString("email", user.email)
+        editor.putString("phone", user.phone)
         editor.putString("country", user.country)
         editor.putString("city", user.city)
         editor.apply()
@@ -62,6 +66,7 @@ class EditProfile : AppCompatActivity(), BottomNavigationView.OnNavigationItemSe
         emailEditText = findViewById(R.id.emailEditEditText)
         countryEditText = findViewById(R.id.countryEditText)
         cityEditText = findViewById(R.id.cityEditText)
+        phoneEditText = findViewById(R.id.PNEditText)
         oldPasswordEditText = findViewById(R.id.oldpasswordEditText)
         newPasswordEditText = findViewById(R.id.newpasswordEditText)
         confirmPasswordEditText = findViewById(R.id.confirmPasswordEditText)
@@ -84,6 +89,7 @@ class EditProfile : AppCompatActivity(), BottomNavigationView.OnNavigationItemSe
             val updatedName = nameEditText.text.toString()
             val updatedEmail = emailEditText.text.toString()
             val updatedCountry = countryEditText.text.toString()
+            val updatedPN = phoneEditText.text.toString()
             val updatedCity = cityEditText.text.toString()
             val updatedPass = if (newPasswordEditText.text.toString().isNotEmpty()) {
                 confirmPasswordEditText.text.toString()
@@ -95,7 +101,7 @@ class EditProfile : AppCompatActivity(), BottomNavigationView.OnNavigationItemSe
             if (updatedName.isNotEmpty() && updatedEmail.isNotEmpty()) {
                 // Update the user information
                 if (updatedPass != null) {
-                    updateUser(updatedName, updatedEmail, updatedCountry, updatedCity, updatedPass)
+                    updateUser(updatedName, updatedEmail, updatedCountry, updatedCity, updatedPN, updatedPass)
                 }
                 println("Update successful!")
 
@@ -104,6 +110,7 @@ class EditProfile : AppCompatActivity(), BottomNavigationView.OnNavigationItemSe
                     updatedName,
                     savedUsername,
                     updatedPass,
+                    updatedPN,
                     updatedEmail,
                     updatedCountry,
                     updatedCity
@@ -127,6 +134,7 @@ class EditProfile : AppCompatActivity(), BottomNavigationView.OnNavigationItemSe
         emailEditText.setText(user.email)
         countryEditText.setText(user.country)
         cityEditText.setText(user.city)
+        phoneEditText.setText(user.phone)
         oldPasswordEditText.setText("")
         newPasswordEditText.setText("")
         confirmPasswordEditText.setText("")
@@ -134,11 +142,10 @@ class EditProfile : AppCompatActivity(), BottomNavigationView.OnNavigationItemSe
 
     private fun getUserData(username: String?): User? {
         val userList = listOf(
-            User("hello", "ola", "abc", "ola@teste.com", "br", "pt"),
-            User("test", "teste", "abc", "teste@test.com", "br", "pt"),
-            User("xripiti", "xpto", "abc", "xpto@test.com", "br", "pt")
+            User("hello", "ola", "abc", "ola@teste.com","678543290", "br", "pt"),
+            User("test", "teste", "abc", "teste@test.com","987654321", "br", "pt"),
+            User("xripiti", "xpto", "abc","xpto@test.com", "123456789", "br", "pt")
         )
-
 
         return userList.find { it.username == username }
     }

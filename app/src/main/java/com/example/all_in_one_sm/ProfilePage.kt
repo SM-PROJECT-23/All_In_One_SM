@@ -28,12 +28,15 @@ data class User(
     var password: String?,
     @SerializedName("email")
     var email: String?,
+    @SerializedName("phone")
+    var phone: String?,
     @SerializedName("country")
     var country: String?,
     @SerializedName("city")
     var city: String?
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
+        parcel.readString(),
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
@@ -47,6 +50,7 @@ data class User(
         parcel.writeString(username)
         parcel.writeString(password)
         parcel.writeString(email)
+        parcel.writeString(phone)
         parcel.writeString(country)
         parcel.writeString(city)
     }
@@ -71,6 +75,7 @@ class ProfilePage : AppCompatActivity(), BottomNavigationView.OnNavigationItemSe
     private lateinit var nameTextView: TextView
     private lateinit var usernameTextView: TextView
     private lateinit var emailTextView: TextView
+    private lateinit var phoneTextView: TextView
     private lateinit var countryTextView: TextView
     private lateinit var cityTextView: TextView
     private lateinit var passwordTextView: TextView
@@ -89,6 +94,7 @@ class ProfilePage : AppCompatActivity(), BottomNavigationView.OnNavigationItemSe
         nameTextView.text = user.name
         usernameTextView.text = user.username
         emailTextView.text = user.email
+        phoneTextView.text = user.phone
         countryTextView.text = user.country
         cityTextView.text = user.city
         passwordTextView.text = user.password
@@ -116,6 +122,7 @@ class ProfilePage : AppCompatActivity(), BottomNavigationView.OnNavigationItemSe
         nameTextView = findViewById(R.id.UserNameTextView)
         usernameTextView = findViewById(R.id.usernameValueTextView)
         emailTextView = findViewById(R.id.emailValueTextView)
+        phoneTextView = findViewById(R.id.PNTextView)
         countryTextView = findViewById(R.id.CountryTextView)
         cityTextView = findViewById(R.id.CityTextView)
         passwordTextView = findViewById(R.id.passTextView)
@@ -123,12 +130,13 @@ class ProfilePage : AppCompatActivity(), BottomNavigationView.OnNavigationItemSe
         val savedUsername = prefs.getString("username", null)
         val savedName = prefs.getString("name", null)
         val savedEmail = prefs.getString("email", null)
+        val savedphone = prefs.getString("phone", null)
         val savedPassword = prefs.getString("password", null)
         val savedCountry = prefs.getString("country", null)
         val savedCity = prefs.getString("city", null)
 
-        if (savedUsername != null && savedName != null && savedEmail != null && savedPassword != null && savedCountry != null && savedCity != null) {
-            user = User(savedName, savedUsername, savedPassword, savedEmail, savedCountry, savedCity)
+        if (savedUsername != null && savedName != null && savedEmail != null && savedphone != null && savedPassword != null && savedCountry != null && savedCity != null) {
+            user = User(savedName, savedUsername, savedPassword, savedEmail, savedphone, savedCountry, savedCity)
             displayUserInfo(user)
         }
 
@@ -211,6 +219,7 @@ class ProfilePage : AppCompatActivity(), BottomNavigationView.OnNavigationItemSe
                             username = userEP.username,
                             password = userEP.password,
                             email = userEP.email,
+                            phone = userEP.phone,
                             country = userEP.country,
                             city = userEP.city
                         )

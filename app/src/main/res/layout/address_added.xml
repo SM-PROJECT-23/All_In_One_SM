@@ -60,6 +60,7 @@
         app:itemTextColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/bottommenu"
-        tools:layout_editor_absoluteX="16dp" />
+        tools:layout_editor_absoluteX="16dp"
+        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

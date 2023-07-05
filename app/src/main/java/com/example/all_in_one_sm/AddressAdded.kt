@@ -1,5 +1,6 @@
 package com.example.all_in_one_sm
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.text.Html
@@ -101,6 +102,7 @@ class AddressAdded : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
             return position.toLong()
         }
 
+        @SuppressLint("SetTextI18n", "ViewHolder", "InflateParams")
         override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
             val view = layoutInflater.inflate(R.layout.address_item, null)
 
