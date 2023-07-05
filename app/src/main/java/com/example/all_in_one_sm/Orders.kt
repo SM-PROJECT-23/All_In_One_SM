@@ -31,7 +31,7 @@ class Orders : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelecte
         Thread {
             val client = OkHttpClient()
             val request = Request.Builder()
-                .url("https://my-json-server.typicode.com/a41792/SMapi/orders")
+                .url("https://my-json-server.typicode.com/a41792/FakeApi/orders")
                 .build()
 
             client.newCall(request).execute().use { response ->
