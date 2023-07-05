@@ -11,80 +11,27 @@ import android.view.MenuItem
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.preference.PreferenceManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.gson.Gson
 import com.google.gson.annotations.SerializedName
 import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.*
-import kotlinx.serialization.decodeFromString
 import okhttp3.*
-import java.io.BufferedReader
 import java.io.IOException
-import java.io.InputStreamReader
-import java.net.HttpURLConnection
-import java.net.URL
-
-data class UserEP(
-    @SerializedName("name")
-    val name: String?,
-    @SerializedName("username")
-    val username: String?,
-    @SerializedName("password")
-    val password: String?,
-    @SerializedName("email")
-    var email: String?,
-    @SerializedName("country")
-    val country: String?,
-    @SerializedName("city")
-    val city: String?
-) : Parcelable {
-    constructor(parcel: Parcel) : this(
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString()
-    )
-
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(name)
-        parcel.writeString(username)
-        parcel.writeString(password)
-        parcel.writeString(email)
-        parcel.writeString(country)
-        parcel.writeString(city)
-    }
-
-    override fun describeContents(): Int {
-        return 0
-    }
-
-    companion object CREATOR : Parcelable.Creator<UserEP> {
-        override fun createFromParcel(parcel: Parcel): UserEP {
-            return UserEP(parcel)
-        }
-
-        override fun newArray(size: Int): Array<UserEP?> {
-            return arrayOfNulls(size)
-        }
-    }
-}
 
 data class User(
     @SerializedName("name")
-    val name: String?,
+    var name: String?,
     @SerializedName("username")
     val username: String?,
     @SerializedName("password")
-    val password: String?,
+    var password: String?,
     @SerializedName("email")
     var email: String?,
     @SerializedName("country")
-    val country: String?,
+    var country: String?,
     @SerializedName("city")
-    val city: String?
+    var city: String?
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString(),
@@ -128,8 +75,9 @@ class ProfilePage : AppCompatActivity(), BottomNavigationView.OnNavigationItemSe
     private lateinit var cityTextView: TextView
     private lateinit var passwordTextView: TextView
 
+    private var isUserDataUpdated = false
     private lateinit var user: User
-    private lateinit var userEP: UserEP
+    private lateinit var currentUser: User
 
     private fun navigateToEditProfile() {
         val intent = Intent(this, EditProfile::class.java)
@@ -146,6 +94,13 @@ class ProfilePage : AppCompatActivity(), BottomNavigationView.OnNavigationItemSe
         passwordTextView.text = user.password
     }
 
+    private fun loadUserData(): User? {
+        val prefs = this.getSharedPreferences("com.example.app", Context.MODE_PRIVATE)
+        val gson = Gson()
+        val json = prefs.getString("userData", null)
+        val type = object : TypeToken<User>() {}.type
+        return gson.fromJson(json, type)
+    }
 
     @OptIn(DelicateCoroutinesApi::class)
     @SuppressLint("SetTextI18n", "MissingInflatedId", "CutPasteId")
@@ -156,7 +111,6 @@ class ProfilePage : AppCompatActivity(), BottomNavigationView.OnNavigationItemSe
         setContentView(R.layout.profile)
 
         val prefs = this.getSharedPreferences("com.example.app", Context.MODE_PRIVATE)
-        val savedUsername = prefs.getString("username", null)
 
         // Initialize the views
         nameTextView = findViewById(R.id.UserNameTextView)
@@ -165,6 +119,25 @@ class ProfilePage : AppCompatActivity(), BottomNavigationView.OnNavigationItemSe
         countryTextView = findViewById(R.id.CountryTextView)
         cityTextView = findViewById(R.id.CityTextView)
         passwordTextView = findViewById(R.id.passTextView)
+
+        val savedUsername = prefs.getString("username", null)
+        val savedName = prefs.getString("name", null)
+        val savedEmail = prefs.getString("email", null)
+        val savedPassword = prefs.getString("password", null)
+        val savedCountry = prefs.getString("country", null)
+        val savedCity = prefs.getString("city", null)
+
+        if (savedUsername != null && savedName != null && savedEmail != null && savedPassword != null && savedCountry != null && savedCity != null) {
+            user = User(savedName, savedUsername, savedPassword, savedEmail, savedCountry, savedCity)
+            displayUserInfo(user)
+        }
+
+        if (!isUserDataUpdated && savedUsername != null) {
+            GlobalScope.launch(Dispatchers.Main) {
+                user = fetchUser(savedUsername)!!
+                displayUserInfo(user)
+            }
+        }
 
         // Set up the BottomNavigationView and edit button
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottomNavigation)
@@ -182,8 +155,39 @@ class ProfilePage : AppCompatActivity(), BottomNavigationView.OnNavigationItemSe
             }
         }
     }
-    @SuppressLint("SuspiciousIndentation")
-    suspend fun fetchUser(username: String): User? {
+
+    override fun onResume() {
+        super.onResume()
+
+        // Fetch user data from the intent
+        val updatedUser: User? = intent.getParcelableExtra("updatedUser")
+
+        if (updatedUser != null) {
+            currentUser = updatedUser
+            displayUserInfo(currentUser)
+            isUserDataUpdated = true
+        } else if (!isUserDataUpdated) {
+            // Fetch user data from the saved username
+            val prefs = this.getSharedPreferences("com.example.app", Context.MODE_PRIVATE)
+            val savedUsername = prefs.getString("username", null)
+
+            if (savedUsername != null) {
+                CoroutineScope(Dispatchers.Main).launch {
+                    val userUpdate = withContext(Dispatchers.IO) {
+                        fetchUser(savedUsername)
+                    }
+                    if (userUpdate != null) {
+                        currentUser = userUpdate
+                        displayUserInfo(currentUser)
+                    } else {
+                        println("User data not found!")
+                    }
+                }
+            }
+        }
+    }
+
+    private suspend fun fetchUser(username: String): User? {
         val apiUrl = "https://my-json-server.typicode.com/a41792/FakeApi/people?username=$username"
 
         val request = Request.Builder()
@@ -223,11 +227,10 @@ class ProfilePage : AppCompatActivity(), BottomNavigationView.OnNavigationItemSe
         }
     }
 
-    private fun parseJsonArray(json: String): List<UserEP> {
-        val listType = object : TypeToken<List<UserEP>>() {}.type
+    private fun parseJsonArray(json: String): List<User> {
+        val listType = object : TypeToken<List<User>>() {}.type
         return Gson().fromJson(json, listType)
     }
-
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation item clicks
