@@ -16,6 +16,8 @@ import android.content.Context
 import android.content.SharedPreferences
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import okhttp3.OkHttpClient
+import okhttp3.Request
 
 class AddressAdded : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
 
@@ -42,18 +44,42 @@ class AddressAdded : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
     override fun onResume() {
         super.onResume()
-        retrieveAddressesFromSharedPreferences()
-        updateAddressListView()
+        retrieveAddressesFromApi()
     }
 
-    private fun retrieveAddressesFromSharedPreferences() {
+    private fun retrieveAddressesFromApi() {
+        Thread {
+            val client = OkHttpClient()
+            val request = Request.Builder()
+                .url("https://my-json-server.typicode.com/a41792/FakeApi/addresses")
+                .build()
+
+            client.newCall(request).execute().use { response ->
+                val gson = Gson()
+                val addressesType = object : TypeToken<List<Address>>() {}.type
+                // Parse the response body to a List of Address objects
+                val apiAddresses = gson.fromJson<List<Address>>(response.body?.string(), addressesType)
+
+                // Update the list on the main thread
+                runOnUiThread {
+                    retrieveAddressesFromSharedPreferences(apiAddresses)
+                    updateAddressListView()
+                }
+            }
+        }.start()
+    }
+
+    private fun retrieveAddressesFromSharedPreferences(apiAddresses: List<Address>) {
         val addressJson = preferences.getString("addressList", "")
         if (addressJson != null && addressJson.isNotEmpty()) {
             val gson = Gson()
             val addressesType = object : TypeToken<ArrayList<Address>>() {}.type
             addressList = gson.fromJson(addressJson, addressesType)
+
+            // Merge API addresses with locally stored ones
+            addressList.addAll(apiAddresses)
         } else {
-            addressList = ArrayList()
+            addressList = ArrayList(apiAddresses)
         }
     }
 
