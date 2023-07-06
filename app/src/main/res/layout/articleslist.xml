@@ -32,7 +32,7 @@
                 android:layout_marginLeft="50dp"
                 android:text="User"
                 android:textColor="@android:color/black"
-                android:textSize="15sp"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 android:translationX="50dp" />
 
@@ -41,7 +41,7 @@
     </LinearLayout>
 
     <ListView
-        android:id="@+id/addressListView"
+        android:id="@+id/articleListView"
         android:layout_width="match_parent"
         android:layout_height="594dp"
         android:layout_marginTop="80dp"

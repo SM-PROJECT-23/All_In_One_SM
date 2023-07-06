@@ -93,7 +93,7 @@ class ArticlesList : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
     }
 
     private fun updateArticle() {
-        val articleListView: ListView = findViewById(R.id.addressListView)
+        val articleListView: ListView = findViewById(R.id.articleListView)
         articleListView.adapter = AddressAdapter()
     }
     private fun saveArticle() {
