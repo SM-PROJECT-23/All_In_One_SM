@@ -23,32 +23,30 @@
                 android:text="Articles"
                 android:textColor="@color/black"
                 android:textSize="36sp"
-                android:translationX="10dp"
-                android:translationY="10dp" />
+                android:translationX="10dp" />
 
             <TextView
                 android:id="@+id/nameUser"
-                android:layout_width="10dp"
+                android:layout_width="142dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_weight="1"
+                android:layout_marginLeft="50dp"
                 android:text="User"
                 android:textColor="@android:color/black"
-                android:textSize="30sp"
+                android:textSize="15sp"
                 android:textStyle="bold"
                 android:translationX="50dp" />
 
         </LinearLayout>
 
-        <ListView
-            android:id="@+id/addressListView"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="20dp"
-            android:layout_weight="1"
-            android:textColor="@android:color/black" />
-
     </LinearLayout>
+
+    <ListView
+        android:id="@+id/addressListView"
+        android:layout_width="match_parent"
+        android:layout_height="594dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginBottom="50dp"
+        android:textColor="@android:color/black" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigation"
@@ -59,7 +57,6 @@
         app:itemIconTint="@color/black"
         app:itemTextColor="@color/black"
         app:menu="@menu/bottommenu" />
-
 
 
 </RelativeLayout>
