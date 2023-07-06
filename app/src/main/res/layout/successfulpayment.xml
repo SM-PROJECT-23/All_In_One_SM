@@ -12,7 +12,7 @@
         android:layout_marginTop="150dp"
         android:layout_height="296dp"
         android:layout_above="@id/successful_text"
-        android:src="@drawable/sucesso" />
+        android:src="@drawable/success" />
 
     <TextView
         android:id="@+id/successful_text"

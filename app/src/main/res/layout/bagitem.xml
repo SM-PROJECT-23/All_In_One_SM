@@ -85,7 +85,7 @@
                 android:layout_marginLeft="320dp"
                 android:text="X"
                 android:textColor="@color/separator_color"
-                android:textSize="14sp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
         </androidx.cardview.widget.CardView>

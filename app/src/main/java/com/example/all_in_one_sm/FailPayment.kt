@@ -6,9 +6,11 @@ import android.os.Bundle
 import android.text.Html
 import android.view.MenuItem
 import android.widget.Button
+import android.widget.TextView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class FailPayment : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener  {
+    private lateinit var text1: TextView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         getSupportActionBar()?.setTitle(Html.fromHtml("<font color=\"black\">" + getString(R.string.app_name) + "</font>"))
@@ -17,6 +19,7 @@ class FailPayment : AppCompatActivity(), BottomNavigationView.OnNavigationItemSe
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottomNavigation)
         bottomNavigationView.setOnNavigationItemSelectedListener(this)
 
+        text1 = findViewById(R.id.fail_text)
         val returnButton: Button = findViewById(R.id.return_button)
         returnButton.setOnClickListener {
             // Navigate to the ShoppingBag activity

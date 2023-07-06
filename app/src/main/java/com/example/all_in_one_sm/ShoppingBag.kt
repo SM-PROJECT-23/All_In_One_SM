@@ -33,7 +33,6 @@ class ShoppingBag : AppCompatActivity(), BottomNavigationView.OnNavigationItemSe
         val preco: String
     )
 
-    private lateinit var pay: TextView
     private lateinit var itemList: ArrayList<ItemsBag>
     private lateinit var preferences: SharedPreferences
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,6 +44,7 @@ class ShoppingBag : AppCompatActivity(), BottomNavigationView.OnNavigationItemSe
         bottomNavigationView.setOnNavigationItemSelectedListener(this)
 
         val payButton: Button = findViewById(R.id.pay_button)
+        val failButton: Button = findViewById(R.id.cencel_button)
 
         preferences = getSharedPreferences("Article", Context.MODE_PRIVATE)
 
@@ -52,10 +52,19 @@ class ShoppingBag : AppCompatActivity(), BottomNavigationView.OnNavigationItemSe
         payButton.setOnClickListener{
             navigateToPay()
         }
+
+        failButton.setOnClickListener{
+            navigateToCancel()
+        }
     }
 
     private fun navigateToPay() {
         val intent = Intent(this, SuccessfullPayment::class.java)
+        startActivity(intent)
+    }
+
+    private fun navigateToCancel() {
+        val intent = Intent(this, FailPayment::class.java)
         startActivity(intent)
     }
 
@@ -116,6 +125,14 @@ class ShoppingBag : AppCompatActivity(), BottomNavigationView.OnNavigationItemSe
         updateArticle()
     }
 
+    private fun calculateTotalPrice(): Double {
+        var totalPrice = 0.0
+        for (item in itemList) {
+            totalPrice += item.preco.toDouble()
+        }
+        return totalPrice
+    }
+
     inner class AddressAdapter : BaseAdapter() {
         override fun getCount(): Int {
             return itemList.size
@@ -136,12 +153,14 @@ class ShoppingBag : AppCompatActivity(), BottomNavigationView.OnNavigationItemSe
             val marca: TextView = view.findViewById(R.id.marcabag)
             val preco: TextView = view.findViewById(R.id.precobag)
             val remove: TextView = view.findViewById(R.id.removebag)
+            val total: TextView = findViewById(R.id.total)
 
             val article = itemList[position]
 
             titulo.text = "${article.titulo}"
             marca.text = "Brand: ${article.marca}"
             preco.text = "Price: ${article.preco}€"
+            total.text = "Total: ${calculateTotalPrice()}€"
 
             remove.setOnClickListener {
                 removeArticle(position)

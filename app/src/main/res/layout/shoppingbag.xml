@@ -75,9 +75,18 @@
         android:id="@+id/pay_button"
         android:layout_width="250dp"
         android:layout_height="50dp"
-        android:layout_marginTop="500dp"
         android:layout_marginLeft="85dp"
-        android:text="Pay" />
+        android:layout_marginTop="500dp"
+        android:text="Pay"
+        app:rippleColor="#7E7A7B" />
+
+    <Button
+        android:id="@+id/cencel_button"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="550dp"
+        android:layout_marginLeft="85dp"
+        android:text="Cancel" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigation"

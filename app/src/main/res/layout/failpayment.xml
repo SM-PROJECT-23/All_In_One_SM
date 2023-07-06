@@ -9,35 +9,30 @@
     android:background="@android:color/white">
 
     <ImageView
-        android:layout_width="390dp"
-        android:layout_height="293dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="11dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginTop="43dp"
+        android:layout_width="393dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="150dp"
         android:src="@drawable/rejected" />
 
     <TextView
-        android:id="@+id/successful_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:id="@+id/fail_text"
+        android:layout_width="393dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="350dp"
         android:text="Payment Failed!"
+        android:textAlignment="center"
         android:textColor="#FF0000"
-        android:layout_marginTop="73dp"
         android:textSize="30sp" />
 
     <Button
         android:id="@+id/return_button"
         android:layout_width="265dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/successful_text"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_gravity="center_horizontal"
         android:layout_marginStart="78dp"
-        android:layout_marginTop="73dp"
+        android:layout_marginTop="500dp"
         android:layout_marginEnd="78dp"
         android:text="Back to Shopping Bag" />
 

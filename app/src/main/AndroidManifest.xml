@@ -44,6 +44,9 @@
         <activity
             android:name=".SuccessfullPayment"
             android:exported="true"/>
+        <activity
+            android:name=".FailPayment"
+            android:exported="true"/>
 
         <activity
             android:name=".RegisterPage"
