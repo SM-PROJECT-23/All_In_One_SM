@@ -54,7 +54,7 @@ class AddItemPage: AppCompatActivity(), BottomNavigationView.OnNavigationItemSel
     @OptIn(DelicateCoroutinesApi::class)
     private fun registerItem(item: ItemModel) {
 
-        val url = "http://192.168.1.72:3000/items"
+        val url = "https://my-json-server.typicode.com/a41792/FakeApi"
 
         val requestBody = """
         {

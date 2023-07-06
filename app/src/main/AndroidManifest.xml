@@ -24,17 +24,20 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Profile"
-            android:exported="false" />
-        <activity
             android:name=".EditProfile"
             android:exported="false"/>
         <activity
+            android:name=".ProfilePage"
+            android:exported="false"
+            android:parentActivityName=".MyAccount"/>
+        <activity
             android:name=".Email"
-            android:exported="false"/>
+            android:exported="false"
+            android:parentActivityName=".LoginPage"/>
         <activity
             android:name=".ForgotPassword"
-            android:exported="false"/>
+            android:exported="false"
+            android:parentActivityName=".Email"/>
         <activity
             android:name=".LoginPage"
             android:exported="true"/>

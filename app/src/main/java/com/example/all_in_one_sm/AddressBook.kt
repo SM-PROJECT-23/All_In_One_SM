@@ -1,6 +1,8 @@
 package com.example.all_in_one_sm
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.Html
 import android.view.MenuItem
@@ -10,8 +12,13 @@ import android.widget.EditText
 import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import java.util.UUID
 
 class AddressBook : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
+
+    private lateinit var preferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +33,8 @@ class AddressBook : AppCompatActivity(), BottomNavigationView.OnNavigationItemSe
         val adapter = ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, countries)
         spinner.adapter = adapter
 
+        preferences = getSharedPreferences("AddressBook", Context.MODE_PRIVATE)
+
         val saveButton: Button = findViewById(R.id.saveButton)
         saveButton.setOnClickListener {
             // Retrieve data from EditTexts and Spinner
@@ -37,7 +46,38 @@ class AddressBook : AppCompatActivity(), BottomNavigationView.OnNavigationItemSe
             val address = findViewById<EditText>(R.id.editTextAddress).text.toString()
             val phoneNumber = findViewById<EditText>(R.id.editTextPhoneNumber).text.toString()
 
-            //Falta guardar o address na api
+            // Save address in SharedPreferences
+            val editor = preferences.edit()
+            editor.putString("name", name)
+            editor.putString("country", country)
+            editor.putString("state", state)
+            editor.putString("city", city)
+            editor.putString("postalCode", postalCode)
+            editor.putString("address", address)
+            editor.putString("phoneNumber", phoneNumber)
+            editor.apply()
+
+            val newAddress = Address(
+                id = UUID.randomUUID().toString(),
+                name = name!!,
+                country = country!!,
+                state = state!!,
+                city = city!!,
+                postalCode = postalCode!!,
+                address = address!!,
+                phoneNumber = phoneNumber!!
+            )
+
+            val gson = Gson()
+            val addressListJson = preferences.getString("addressList", "[]")
+            val addressListType = object : TypeToken<List<Address>>(){}.type
+            var addressList = gson.fromJson<List<Address>>(addressListJson, addressListType).toMutableList()
+            addressList.add(newAddress)
+            preferences.edit().putString("addressList", gson.toJson(addressList)).apply()
+
+            // Navigate to AddressAdded activity
+            val intent = Intent(this, AddressAdded::class.java)
+            startActivity(intent)
         }
     }
 

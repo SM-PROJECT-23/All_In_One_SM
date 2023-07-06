@@ -2,7 +2,6 @@ package com.example.all_in_one_sm
 import android.content.Context
 import android.content.Intent
 import android.content.res.ColorStateList
-import android.graphics.Color
 import android.os.Bundle
 import android.text.Html
 import android.view.MenuItem
@@ -10,7 +9,6 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import com.example.all_in_one_sm.YourArticle
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
@@ -62,7 +60,7 @@ class MyAccount : AppCompatActivity(), BottomNavigationView.OnNavigationItemSele
         }
 
         profileButton.setOnClickListener {
-            val intent = Intent(this, Profile::class.java)
+            val intent = Intent(this, ProfilePage::class.java)
             startActivity(intent)
         }
 
@@ -72,7 +70,7 @@ class MyAccount : AppCompatActivity(), BottomNavigationView.OnNavigationItemSele
         }
 
         addressButton.setOnClickListener {
-            val intent = Intent(this, AddressBook::class.java)
+            val intent = Intent(this, AddressAdded::class.java)
             startActivity(intent)
         }
 
