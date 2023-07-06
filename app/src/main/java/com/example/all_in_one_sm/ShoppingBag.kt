@@ -49,6 +49,9 @@ class ShoppingBag : AppCompatActivity(), BottomNavigationView.OnNavigationItemSe
         preferences = getSharedPreferences("Article", Context.MODE_PRIVATE)
 
 
+        payButton.setOnClickListener{
+            navigateToPay()
+        }
     }
 
     private fun navigateToPay() {
@@ -112,6 +115,7 @@ class ShoppingBag : AppCompatActivity(), BottomNavigationView.OnNavigationItemSe
         saveArticle()
         updateArticle()
     }
+
     inner class AddressAdapter : BaseAdapter() {
         override fun getCount(): Int {
             return itemList.size
@@ -138,10 +142,10 @@ class ShoppingBag : AppCompatActivity(), BottomNavigationView.OnNavigationItemSe
             titulo.text = "${article.titulo}"
             marca.text = "Brand: ${article.marca}"
             preco.text = "Price: ${article.preco}€"
+
             remove.setOnClickListener {
                 removeArticle(position)
             }
-
             return view
         }
     }

@@ -7,31 +7,22 @@
     android:background="@android:color/white">
 
     <ImageView
+        android:id="@+id/sucesso"
         android:layout_width="393dp"
+        android:layout_marginTop="150dp"
         android:layout_height="296dp"
         android:layout_above="@id/successful_text"
-        android:src="@drawable/success" />
+        android:src="@drawable/sucesso" />
 
     <TextView
         android:id="@+id/successful_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="Payment Successful!"
         android:layout_marginTop="53dp"
+        android:text="Payment Successful!"
         android:textColor="#00FF00"
         android:textSize="30sp" />
-
-    <TextView
-        android:id="@+id/payment_info"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/successful_text"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="53dp"
-        android:text="As been paid to"
-        android:textColor="@android:color/black"
-        android:textSize="18sp" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigation"

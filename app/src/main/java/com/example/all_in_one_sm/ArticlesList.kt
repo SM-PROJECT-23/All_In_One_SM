@@ -144,6 +144,7 @@ class ArticlesList : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
             tamanho.text = "Size: ${article.tamanho}"
             categoria.text = "Category: ${article.categoria}"
             preco.text = "Price: ${article.preco}€"
+
             remove.setOnClickListener {
                 removeArticle(position)
             }

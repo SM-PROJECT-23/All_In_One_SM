@@ -42,7 +42,7 @@
             android:name=".LoginPage"
             android:exported="true"/>
         <activity
-            android:name=".ArticlesItem"
+            android:name=".SuccessfullPayment"
             android:exported="true"/>
 
         <activity
