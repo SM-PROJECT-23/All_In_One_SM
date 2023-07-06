@@ -55,10 +55,10 @@ class ArticlesList : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
     override fun onResume() {
         super.onResume()
-        retrieveAddressesFromApi()
+        retrieveItemsFromApi()
     }
 
-    private fun retrieveAddressesFromApi() {
+    private fun retrieveItemsFromApi() {
         Thread {
             val client = OkHttpClient()
             val request = Request.Builder()
@@ -80,16 +80,16 @@ class ArticlesList : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         }.start()
     }
 
-    private fun retrieveArticle(apiAddresses: List<Items>) {
+    private fun retrieveArticle(apiItems: List<Items>) {
         val json = preferences.getString("article", "")
         if (json != null && json.isNotEmpty()) {
             val gson = Gson()
             val addressesType = object : TypeToken<ArrayList<Items>>() {}.type
             itemList = gson.fromJson(json, addressesType)
 
-            itemList.addAll(apiAddresses)
+            itemList.addAll(apiItems)
         } else {
-            itemList = ArrayList(apiAddresses)
+            itemList = ArrayList(apiItems)
         }
     }
 

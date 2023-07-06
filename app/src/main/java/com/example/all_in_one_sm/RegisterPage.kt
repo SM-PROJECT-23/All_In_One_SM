@@ -102,7 +102,7 @@ class RegisterPage : AppCompatActivity() {
     }
 
     private fun navigateToHome() {
-        val intent = Intent(this, YourArticle::class.java)
+        val intent = Intent(this, ArticlesList::class.java)
         startActivity(intent)
     }
 
