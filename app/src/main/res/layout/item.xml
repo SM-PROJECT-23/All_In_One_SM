@@ -20,7 +20,7 @@
             android:layout_height="210dp"
             android:layout_marginBottom="10dp"
             android:gravity="center"
-            android:src="@drawable/reddress" />
+            android:src="@drawable/roupa" />
 
         <TextView
             android:id="@+id/textName"
@@ -47,7 +47,6 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="0dp"
-                    android:text="Red Dress"
                     android:textColor="@color/black"
                     android:textSize="24sp"
                     android:textStyle="bold" />
@@ -61,7 +60,6 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="-5dp"
                     android:layout_marginBottom="0dp"
-                    android:text="H&amp;M"
                     android:textColor="@color/black"
                     android:textSize="17sp" />
 
@@ -101,7 +99,6 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="30dp"
                     android:layout_marginBottom="0dp"
-                    android:text="Category: Dress"
                     android:textColor="@color/black"
                     android:textSize="15sp"
                     android:textStyle="bold" />
@@ -112,7 +109,6 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="0dp"
-                    android:text="Size: S/36/8"
                     android:textColor="@color/black"
                     android:textSize="15sp"
                     android:textStyle="bold" />
@@ -123,7 +119,6 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="0dp"
-                    android:text="Color: Red"
                     android:textColor="@color/black"
                     android:textSize="15sp"
                     android:textStyle="bold" />
@@ -135,7 +130,6 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="0dp"
                     android:textSize="15sp"
-                    android:text="State: Never Used"
                     android:textColor="@color/black"
                     android:textStyle="bold" />
 
