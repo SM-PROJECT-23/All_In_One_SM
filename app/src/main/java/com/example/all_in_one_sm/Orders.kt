@@ -59,7 +59,7 @@ class Orders : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelecte
         // Handle navigation item clicks
         when (item.itemId) {
             R.id.home -> {
-                val intent = Intent(this, YourArticle::class.java)
+                val intent = Intent(this, ArticlesList::class.java)
                 startActivity(intent)
                 return true
             }

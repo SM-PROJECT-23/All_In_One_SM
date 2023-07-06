@@ -28,7 +28,8 @@ class ArticlesList : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         val cor: String,
         val tamanho: String,
         val categoria: String,
-        val estado: String
+        val estado: String,
+        val preco: String
     )
 
     private lateinit var itemList: ArrayList<Items>
@@ -49,8 +50,6 @@ class ArticlesList : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
         val displayNome = findViewById<TextView>(R.id.nameUser)
         displayNome.text = "Hello $savedUsername"
-
-
     }
 
     override fun onResume() {
@@ -97,6 +96,19 @@ class ArticlesList : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         val articleListView: ListView = findViewById(R.id.addressListView)
         articleListView.adapter = AddressAdapter()
     }
+    private fun saveArticle() {
+        val edit = preferences.edit()
+        val gson = Gson()
+        val articleJson = gson.toJson(itemList)
+        edit.putString("Article", articleJson)
+        edit.apply()
+    }
+
+    private fun removeArticle(position: Int) {
+        itemList.removeAt(position)
+        saveArticle()
+        updateArticle()
+    }
 
     inner class AddressAdapter : BaseAdapter() {
         override fun getCount(): Int {
@@ -117,13 +129,24 @@ class ArticlesList : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
             val titulo: TextView = view.findViewById(R.id.titulo)
             val marca: TextView = view.findViewById(R.id.marca)
             val cor: TextView = view.findViewById(R.id.cor)
+            val estado: TextView = view.findViewById(R.id.estado)
+            val tamanho: TextView = view.findViewById(R.id.tamanho)
+            val categoria: TextView = view.findViewById(R.id.categoria)
+            val preco: TextView = view.findViewById(R.id.preco)
+            val remove: TextView = view.findViewById(R.id.remove)
 
             val article = itemList[position]
 
             titulo.text = "${article.titulo}"
-            marca.text = "${article.marca}"
-            cor.text = "${article.cor}"
-
+            marca.text = "Brand: ${article.marca}"
+            cor.text = "Color: ${article.cor}"
+            estado.text = "State: ${article.estado}"
+            tamanho.text = "Size: ${article.tamanho}"
+            categoria.text = "Category: ${article.categoria}"
+            preco.text = "Price: ${article.preco}"
+            remove.setOnClickListener {
+                removeArticle(position)
+            }
             return view
         }
     }
@@ -132,7 +155,7 @@ class ArticlesList : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         // Handle navigation item clicks
         when (item.itemId) {
             R.id.home -> {
-                val intent = Intent(this, YourArticle::class.java)
+                val intent = Intent(this, ArticlesList::class.java)
                 startActivity(intent)
                 return true
             }
@@ -156,7 +179,6 @@ class ArticlesList : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                 startActivity(intent)
                 return true
             }
-            // Add more cases for each menu item
         }
         return false
     }
