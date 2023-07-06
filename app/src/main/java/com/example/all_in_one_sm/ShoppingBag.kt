@@ -128,7 +128,8 @@ class ShoppingBag : AppCompatActivity(), BottomNavigationView.OnNavigationItemSe
     private fun calculateTotalPrice(): Double {
         var totalPrice = 0.0
         for (item in itemList) {
-            totalPrice += item.preco.toDouble()
+            val price = item.preco.toDoubleOrNull() ?: continue
+            totalPrice += price
         }
         return totalPrice
     }

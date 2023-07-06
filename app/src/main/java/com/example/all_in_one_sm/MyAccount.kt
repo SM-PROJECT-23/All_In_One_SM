@@ -65,7 +65,7 @@ class MyAccount : AppCompatActivity(), BottomNavigationView.OnNavigationItemSele
         }
 
         itemsButton.setOnClickListener {
-            val intent = Intent(this, YourItemPage::class.java)
+            val intent = Intent(this, ArticlesList::class.java)
             startActivity(intent)
         }
 
